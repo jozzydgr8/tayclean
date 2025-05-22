@@ -1,3 +1,7 @@
+body{
+  background: var(--color-black);
+  color: var(--color-light-grey);
+}
 :root {
   --color-teal-blue: #2ac1aa;
   --color-light-grey: #d7d9d6;
@@ -6,4 +10,41 @@
   --color-dark-brown: #6b3e2d;
   --color-yellow: #fef157;
   --color-black: #000000;
+}
+.navbar-brand img{
+  width:50%;
+
+}
+.nav-link{
+  color: var(--color-light-grey) !important;
+}
+@media (max-width:750px) {
+  .navbar-brand img{
+    width:70%;
+  
+  }
+  .navbar-brand{
+    width: 70%;
+
+  }
+}
+.servicegrid{
+   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 30px;
+}
+.servicegridsecond{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 70px;
+}
+.servicegrid > div, .servicegridsecond > div{
+  background-color: var(--color-dark-green);
+  color: white;
+  padding: 15px;
+  min-width: 200px;
 }
