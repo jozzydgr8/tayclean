@@ -40,8 +40,12 @@ nav .container-fluid{
 
   }
 }
-.servicegrid,
-.servicegridsecond {
+.background{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.servicegrid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
