@@ -12,7 +12,7 @@ export const Header= ()=>{
         }
     }
     return(
-        <section style={{...styles.background,}}>
+        <section style={{...styles.background,textAlign:'center'}}>
             <div className="container-fluid">
                 <div style={{display:"flex", alignItems:'center', justifyContent:'center', flexDirection:"column",minHeight:'70vh',}} >
                     <h1>Tay Cleaning Service</h1>
@@ -20,7 +20,7 @@ export const Header= ()=>{
                     <div className="servicegrid">
                         {
                             services.map((service, index)=>(
-                                <div key={index} className={index.toString()}>
+                                <div key={index}>
                                     {service}
                                 </div>
                             ))

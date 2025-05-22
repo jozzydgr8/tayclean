@@ -55,20 +55,9 @@ nav .container-fluid{
   background-color: var(--color-dark-green);
   color: white;
   padding: 15px;
-  flex: 1 1 250px; /* flexible but min 200px */
-  max-width: 400px; /* optional: to prevent stretching too much */
+  flex: 1 1 250px;
+  max-width: 400px;
   box-sizing: border-box;
+
 }
 
-.servicedisplaygrid{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-.servicedisplaygrid > div{
-  background-color: var(--color-light-grey);
-  color: var(--color-black);
-  padding: 15px;
-  width: 300px;
-}
