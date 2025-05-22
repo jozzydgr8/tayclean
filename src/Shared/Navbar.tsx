@@ -5,7 +5,7 @@ function Navbar() {
 
   return (
   <>
-  <nav className="navbar navbar-expand-lg " data-bs-theme="light">
+  <nav className="navbar navbar-expand-lg " data-bs-theme="dark">
   <div className="container-fluid">
     <NavLink className="navbar-brand" to="#">
       <img src={logo} alt='logo'/>

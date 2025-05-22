@@ -8,21 +8,18 @@ export const Header= ()=>{
             backgroundPosition:'center center',
             backgroundSize:'cover',
             backgroundRepeat:'no-repeat',
-            height:'70vh',
-            display:"flex",
-            alignItems:'center',
-            justifyContent:'center',
+            
         }
     }
     return(
-        <section>
+        <section style={{...styles.background,}}>
             <div className="container-fluid">
-                <div style={{...styles.background, flexDirection:"column"}}>
+                <div style={{display:"flex", alignItems:'center', justifyContent:'center', flexDirection:"column",minHeight:'70vh',}} >
                     <h1>Tay Cleaning Service</h1>
                     <h3>Residential and Commercial Cleaning Service in Lagos</h3>
                     <div className="servicegrid">
                         {
-                            services.slice(0,5).map((service, index)=>(
+                            services.map((service, index)=>(
                                 <div key={index} className={index.toString()}>
                                     {service}
                                 </div>
@@ -33,7 +30,7 @@ export const Header= ()=>{
 
                     </div>
                     <br/>
-                    <div className="servicegridsecond">
+                    {/* <div className="servicegridsecond">
                         {
                             services.slice(5,services.length).map((service, index)=>(
                                 <div key={index} className={index.toString()}>
@@ -41,7 +38,7 @@ export const Header= ()=>{
                                 </div>
                             ))
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>
