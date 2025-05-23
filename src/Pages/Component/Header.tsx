@@ -12,7 +12,7 @@ export const Header= ()=>{
         }
     }
     return(
-        <section style={{...styles.background,textAlign:'center'}}>
+        <section style={{...styles.background,textAlign:'center', color:"#d7d9d6"}}>
             <div className="container-fluid">
                 <div style={{display:"flex", alignItems:'center', justifyContent:'center', flexDirection:"column",minHeight:'70vh',}} >
                     <h1>Tay Cleaning Service</h1>
@@ -20,7 +20,7 @@ export const Header= ()=>{
                     <div className="servicegrid">
                         {
                             services.map((service, index)=>(
-                                <div key={index}>
+                                <div key={index} style={{textTransform:'uppercase'}}>
                                     {service}
                                 </div>
                             ))

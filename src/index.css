@@ -1,6 +1,6 @@
 body{
-  background: var(--color-black);
-  color: var(--color-light-grey);
+  background: var(--color-light-grey);
+  color: var(--color-black);
 }
 :root {
   --color-teal-blue: #2ac1aa;
@@ -28,7 +28,7 @@ nav .container-fluid{
 
 }
 .nav-link{
-  color: var(--color-light-grey) !important;
+  color: var(--color-black) !important;
 }
 @media (max-width:750px) {
   .navbar-brand img{
@@ -57,7 +57,7 @@ nav .container-fluid{
 
 .servicegrid > div{
   background-color: var(--color-dark-green);
-  color: white;
+  color: var(--color-light-grey);
   padding: 15px;
   flex: 1 1 250px;
   max-width: 400px;

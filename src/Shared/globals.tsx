@@ -2,14 +2,9 @@ import serviceBackground from '../assets/housebackground.jpg'
 export const services = [
   "BOOK DOMESTIC",
   "BOOK COMMERCIAL",
-  "NDIS/TAC/DVA/WORKSAFE",
-  "OVEN CLEANING",
-  "WINDOW CLEANING",
-  "END OF LEASE CLEANING",
-  "STRATA CLEANING",
-  "PRESSURE WASHING",
-  "GUTTER CLEANING",
-  "GARDEN MAINTENANCE"
+  "Book Events",
+  "BOOK WORKSPACE"
+  
 ];
 
 
@@ -17,32 +12,17 @@ export const services = [
 export const service = [
   {
     title: "House cleaning",
-    description: "Thorough and reliable cleaning services tailored for your home.",
+    description: "From a basic home clean to a deep, clean, Our team of trained staff will leave you satisfied with a magic touch.",
     image: serviceBackground,
   },
   {
     title: "Commercial cleaning",
-    description: "Expert cleaning for offices, retail spaces, and commercial buildings.",
+    description: "Hire us to keep your office and working space sparkling clean at a very affordable price",
     image: serviceBackground,
   },
-  {
-    title: "Strata cleaning",
-    description: "Comprehensive maintenance and cleaning for shared property spaces.",
-    image: serviceBackground,
-  },
-  {
-    title: "NDIS/TAC/DVA/WORKSAFE",
-    description: "Special care cleaning services for NDIS, TAC, DVA, and WorkSafe clients.",
-    image: serviceBackground,
-  },
-  {
-    title: "WINDOW CLEANING",
-    description: "Crystal-clear window cleaning for both residential and commercial properties.",
-    image: serviceBackground,
-  },
-  {
-    title: "END OF LEASE CLEANING",
-    description: "Deep cleaning to meet landlord requirements and help you get your bond back.",
-    image: serviceBackground,
-  },
+ {
+  title: "Event Cleaning",
+  description: "To tired to clean up after an eventful ceremony? No worries, we are just a call away.",
+  image: serviceBackground,
+}
 ];
