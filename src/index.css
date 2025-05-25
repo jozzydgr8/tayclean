@@ -12,12 +12,13 @@ body{
   --color-black: #000000;
 }
 .successbutton, .successbutton:hover{
-  background: var(--color-light-green) !important;
+  background: var(--color-dark-green) !important;
   color: white;
 }
-h2, strong{
-  
+.nocolorbutton{
+  color:white;
 }
+
 #footer{
   background: var(--color-dark-green);
   color: white;

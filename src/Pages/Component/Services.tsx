@@ -8,7 +8,7 @@ export const Services = ()=>{
                 <div className="servicegrid">
                 {
                     service.map((service, index)=>(
-                        <div key={index} className={index.toString()}>
+                        <div key={index} className={index.toString()} style={{ border:'solid 1px #d7d9d6', color:"black", borderRadius:"20px", background:'white'}}>
                             <div style={{backgroundImage:`url(${service.image})`,
                             height:'200px', backgroundSize:"cover",
                              backgroundPosition:"center center", backgroundRepeat:"no-repeat"}}></div>

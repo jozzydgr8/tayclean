@@ -10,7 +10,7 @@ export const Choose = ()=>{
         },
         icons:{
             fontSize:'24px',
-            color:'#587c3d'
+            color:'#2ac1aa'
             
         }
     }
