@@ -10,14 +10,14 @@ export const Footer = ()=>{
                 <div className="row">
                     <div className="col-md-4">
                     <h4>Our Locations</h4>
-                        <EnvironmentOutlined/> Tay Clean 
+                        <EnvironmentOutlined/> Tay Clean Online Services
                         <br/><br/>
                         
                     </div>
 
                     <div className="col-md-4">
                         <h4>Contact Section</h4>
-                        Phone No: <a href=''>+234 888 888 8888</a><br/><br/>
+                        Email: <a href='mailto'>taycleaningservices@gmail.com</a> <br/> <br/>
                         Phone No: <a href=''>+234 888 888 8888</a><br/><br/>
                         Phone No: <a href=''>+234 888 888 8888</a><br/><br/>
                        
@@ -25,9 +25,9 @@ export const Footer = ()=>{
                         
                     <div className="col-md-4">
                         <h4>Quick Links</h4>
-                        <a href=''>Call us now: +234 802 699 2881 </a>
+                        <a href=''>Call us now: +234 888 888 8888 </a>
                         <br/> <br/>
-                        <a href='https://wa.link/o2oy0h'>Send Us a message on Whatsapp <SendOutlined/></a><br/> <br/>
+                        <a href=''>Send Us a message on Whatsapp <SendOutlined/></a><br/> <br/>
                         <a href='#'>Our Services</a><br/><br/>
                     </div>
                 </div>

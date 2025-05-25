@@ -5,7 +5,7 @@ function Navbar() {
 
   return (
   <>
-  <nav className="navbar navbar-expand-lg " data-bs-theme="dark">
+  <nav className="navbar navbar-expand-lg " data-bs-theme="light">
   <div className="container-fluid">
     <NavLink className="navbar-brand" to="#">
       <img src={logo} alt='logo'/>
@@ -30,7 +30,7 @@ function Navbar() {
         </li>
 
         <li className="nav-item">
-          <FlatButton onClick={()=>{}} title='Contact Us' className='btn-primary'/>
+          <FlatButton onClick={()=>{}} title='Contact Us' className='successbutton'/>
         </li>
 
         

@@ -1,5 +1,5 @@
 body{
-  background: var(--color-light-grey);
+  background: white;
   color: var(--color-black);
 }
 :root {
@@ -10,6 +10,21 @@ body{
   --color-dark-brown: #6b3e2d;
   --color-yellow: #fef157;
   --color-black: #000000;
+}
+.successbutton, .successbutton:hover{
+  background: var(--color-light-green) !important;
+  color: white;
+}
+h2, strong{
+  
+}
+#footer{
+  background: var(--color-dark-green);
+  color: white;
+}
+h2{
+  text-align: center;
+  color: var(--color-teal-blue);
 }
 a{
   text-decoration: none;
@@ -57,7 +72,7 @@ nav .container-fluid{
 
 .servicegrid > div{
   background-color: var(--color-dark-green);
-  color: var(--color-light-grey);
+  color: white;
   padding: 15px;
   flex: 1 1 250px;
   max-width: 400px;
@@ -65,3 +80,11 @@ nav .container-fluid{
 
 }
 
+.footer-icons a {
+  font-size: 35px;
+}
+.footer-icons{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}

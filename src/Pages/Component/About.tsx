@@ -3,7 +3,7 @@ export const About = ()=>{
     const styles = {
         background:{
             background:`url(${tayImage})`,
-            minHeight:'200px',
+            minHeight:'150px',
             backgroundRepeat:'no-repeat',
             backgroundPosition:'center center',
             backgroundSize:'contain'
@@ -15,6 +15,7 @@ export const About = ()=>{
     return(
         <section>
             <div className="container-fluid">
+                <h2>About Us</h2>
                 <div className="row">
                     <div className="col-md-6">
                         <div style={styles.background} className='background' >
