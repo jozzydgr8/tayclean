@@ -1,7 +1,7 @@
 import { Dayjs } from "dayjs"
 
 export type bookedDatesType ={
-    date:Dayjs
+    date:string
 
 }
 export interface BookingFormValues {

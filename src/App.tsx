@@ -7,6 +7,7 @@ import {collection, getFirestore, onSnapshot} from "firebase/firestore";
 import { UseDataContext } from "./Context/UseDataContext";
 import { useEffect } from "react";
 import { bookedDatesType, BookingFormValues } from "./Shared/Types";
+import dayjs from "dayjs";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,7 +22,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const bookinDateRef = collection(db, 'bookingDates');
+export const bookingDateRef = collection(db, 'bookingDates');
 export const bookingDataRef = collection(db, 'bookingData');
 
 
@@ -30,14 +31,19 @@ function App() {
   //useEffect for booking dates 
   useEffect(() => {
   dispatch({ type: 'setloading', payload: true });
-  const unSubscribe = onSnapshot(bookinDateRef, (snapshot) => {
+  const unSubscribe = onSnapshot(bookingDateRef, (snapshot) => {
     const data: bookedDatesType[] = snapshot.docs.map((doc) => {
-      const docData = doc.data();
-      return {
-        id: doc.id,
-        date:docData.date
-      };
-    });
+    const docData = doc.data();
+    const rawDate = docData.date;
+
+    return {
+      id: doc.id,
+      date: rawDate.toDate // Firestore Timestamp to JS Date
+        ? dayjs(rawDate.toDate()).format("YYYY-MM-DD")
+        : rawDate, // fallback for already string values
+    };
+  });
+
 
     dispatch({ type: 'getBookingDates', payload: data });
     console.log(data, 'bookedDates');
