@@ -4,7 +4,7 @@ import { JSX } from "react"
 type props = {
     title?:string,
     onClick?:()=>void,
-    type?:string,
+    type?:string
     className?:string,
     disabled?: boolean,
     children?: JSX.Element,

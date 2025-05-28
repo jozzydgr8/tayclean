@@ -129,13 +129,11 @@ const BookingPage: React.FC = () => {
               />
             </Form.Item>
             <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button style={{background:'#587c3d', color:'white'}} htmlType="submit" block>
               Book Cleaning
             </Button>
           </Form.Item>
-            {/* <div style={{ textAlign: 'right', marginTop: 24 }}>
-              <FlatButton title="Confirm Booking" type="submit" className="buttondark" />
-            </div> */}
+            
           </Form>
         </Card>
       </div>
