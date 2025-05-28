@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/tayclean/static/css/main.e8928c8c.css",
-    "main.js": "/tayclean/static/js/main.7736ff5e.js",
+    "main.css": "/tayclean/static/css/main.287e040b.css",
+    "main.js": "/tayclean/static/js/main.e6093e2f.js",
     "static/js/453.d2b87a87.chunk.js": "/tayclean/static/js/453.d2b87a87.chunk.js",
     "static/media/housebackground.jpg": "/tayclean/static/media/housebackground.126defae3502e0650a93.jpg",
     "static/media/Tayclean_logo.png": "/tayclean/static/media/Tayclean_logo.1eb607a30dc92e91395a.png",
     "index.html": "/tayclean/index.html",
-    "main.e8928c8c.css.map": "/tayclean/static/css/main.e8928c8c.css.map",
-    "main.7736ff5e.js.map": "/tayclean/static/js/main.7736ff5e.js.map",
+    "main.287e040b.css.map": "/tayclean/static/css/main.287e040b.css.map",
+    "main.e6093e2f.js.map": "/tayclean/static/js/main.e6093e2f.js.map",
     "453.d2b87a87.chunk.js.map": "/tayclean/static/js/453.d2b87a87.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e8928c8c.css",
-    "static/js/main.7736ff5e.js"
+    "static/css/main.287e040b.css",
+    "static/js/main.e6093e2f.js"
   ]
 }
