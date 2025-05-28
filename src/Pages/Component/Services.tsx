@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { FlatButton } from "../../Shared/FlatButton"
 import { service } from "../../Shared/globals"
 
@@ -8,7 +9,8 @@ export const Services = ()=>{
                 <div className="servicegrid">
                 {
                     service.map((service, index)=>(
-                        <div key={index} className={index.toString()} style={{ border:'solid 1px #d7d9d6', color:"black", borderRadius:"20px", background:'white'}}>
+                        <Link to={`${service.id}`}
+                        key={index} className='servicegridcontent' style={{ border:'solid 1px #d7d9d6', color:"black", borderRadius:"20px", background:'white'}}>
                             <div style={{backgroundImage:`url(${service.image})`,
                             height:'200px', backgroundSize:"cover",
                              backgroundPosition:"center center", backgroundRepeat:"no-repeat"}}></div>
@@ -19,7 +21,7 @@ export const Services = ()=>{
                                     <FlatButton className="successbutton" onClick={()=>{}} title={`BOOK NOW - ₦${service.cost}`}/>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
                     

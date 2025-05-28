@@ -38,7 +38,7 @@ function App() {
 
     return {
       id: doc.id,
-      date: rawDate.toDate // Firestore Timestamp to JS Date
+      date: rawDate?.toDate // Firestore Timestamp to JS Date
         ? dayjs(rawDate.toDate()).format("YYYY-MM-DD")
         : rawDate, // fallback for already string values
     };
@@ -65,7 +65,9 @@ function App() {
           id: doc.id,
           name: docData.name,
           email: docData.email,
-          date: docData.date
+          date: docData.date,
+          address:docData.address,
+          phone:docData.phone,
         };
       });
 
