@@ -10,20 +10,32 @@ export const Choose = ()=>{
         },
         icons:{
             fontSize:'24px',
-            color:'#2ac1aa'
+            color:'#2ac1aa',
             
+        },
+        header:{
+            background:"#a3d65e",
+            padding:'3px 15px',
         }
     }
     return(
         <section>
             <div className="container-fluid">
                 <h2>Why Choose Us?</h2>
-                <div className="row">
-                    <div className="col-md-6">
-                        <div style={styles.contents}>
+                    <div>
+                        
+                        <p style={{textAlign:'center'}}>
+                            With the level of exceptional service we provide and trained staff we have, Our team is what you need 
+                            to ensure your home or commercial building is in the right care.
+                        </p>
+                    </div>
+
+
+                    <div className='row'>
+                        <div style={styles.contents} className='col-md-4'>
                             <CheckOutlined style={styles.icons}/>
                         <div>
-                            <strong>
+                            <strong style={styles.header}>
                                 Quality Service
                             </strong>
                             <br/>
@@ -33,10 +45,10 @@ export const Choose = ()=>{
                             </small>
                         </div>
                         </div>
-                        <div style={styles.contents}>
+                        <div style={styles.contents} className='col-md-4'>
                             <GlobalOutlined style={styles.icons}/>
                             <div>
-                                <strong>
+                                <strong style={styles.header}>
                                     Eco-Friendly Products
                                 </strong>
                                 <br/>
@@ -46,10 +58,10 @@ export const Choose = ()=>{
                                 </small>
                             </div>
                         </div>
-                        <div style={styles.contents}>
+                        <div style={styles.contents} className='col-md-4'>
                             <StarOutlined style={styles.icons}/>
                             <div>
-                                <strong>100% Satisfaction</strong>
+                                <strong style={styles.header}>100% Satisfaction</strong>
                                 <br/>
                                 <small>
                                     We will meet and exceed the expectations of our customers that ensures a high return rate in
@@ -58,14 +70,8 @@ export const Choose = ()=>{
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        
-                        <p>
-                            With the level of exceptional service we provide and trained staff we have, Our team is what you need 
-                            to ensure your home or commercial building is in the right care.
-                        </p>
-                    </div>
-                </div>
+                    
+                
             </div>
         </section>
     )

@@ -6,6 +6,7 @@ export const Services = ()=>{
     return(
         <section>
             <div className="container-fluid">
+                <h2>Our Services</h2>
                 <div className="servicegrid">
                 {
                     service.map((service, index)=>(

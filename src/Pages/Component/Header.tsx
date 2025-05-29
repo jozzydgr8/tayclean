@@ -12,7 +12,7 @@ export const Header= ()=>{
         }
     }
     return(
-        <section style={{...styles.background,textAlign:'center', color:"#d7d9d6"}}>
+        <section style={{...styles.background,textAlign:'center', color:"white"}}>
             <div className="container-fluid">
                 <div style={{display:"flex", alignItems:'center', justifyContent:'center', flexDirection:"column",minHeight:'70vh',}} >
                     <h1>Tay Cleaning Service</h1>

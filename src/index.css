@@ -1,6 +1,7 @@
 body{
   background: white;
   color: var(--color-black);
+  font-family: "podkova";
 }
 :root {
   --color-teal-blue: #2ac1aa;
@@ -10,6 +11,13 @@ body{
   --color-dark-brown: #6b3e2d;
   --color-yellow: #fef157;
   --color-black: #000000;
+}
+h3, h2{
+  font-family: "Fredoka";
+}
+h1{
+  font-family: "Athiti";
+  font-weight: bold;
 }
 a{
   color: inherit !important;
