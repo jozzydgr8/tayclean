@@ -42,6 +42,8 @@ const BookingPage: React.FC = () => {
         date: selectedDate,
         state: 'Lagos',
         country: 'Nigeria',
+        title:data?.title,
+        totalPrice:data?.cost,
       });
 
       message.success('Booking successful!');

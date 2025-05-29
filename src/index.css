@@ -11,6 +11,10 @@ body{
   --color-yellow: #fef157;
   --color-black: #000000;
 }
+a{
+  color: inherit !important;
+  text-decoration: none;
+}
 .successbutton, .successbutton:hover{
   background: var(--color-dark-green) !important;
   color: white;
@@ -27,10 +31,7 @@ h2{
   text-align: center;
   color: var(--color-teal-blue);
 }
-a{
-  text-decoration: none;
-  color: inherit;
-}
+
 section > .container-fluid{
   padding: 5% 3%;
 }
@@ -89,6 +90,95 @@ nav .container-fluid{
   gap: 15px;
   align-items: center;
 }
+
+/* layoutgrid */
+.displaygrid {
+  display: grid;
+  margin: 0 auto;
+  grid-gap: 0px;
+  height: 100vh;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+  grid-auto-rows: minmax(10px, auto);
+  /* background-color: #fff; */
+   /* Auto rows with a minimum height of 100px */
+  
+  /* Define grid areas across rows */
+  grid-template-areas: 
+    "one second second second"
+    "one three three three"
+    "one three three three "
+    "one three three three "
+    "one three three three "
+    "one three three three "
+    "one three three three"
+    ;
+/* Empty cells represented by . */
+}
+@media (max-width:800px) {
+  .displaygrid{
+    grid-template-areas:
+    "second second second second"
+    "three three three three"
+    "three three three three "
+    "three three three three "
+    "three three three three "
+    "three three three three "
+    "three three three three" ;
+  }
+  .one {
+    display: none;
+  }
+}
+
+
+
+.one {
+  grid-area: one;
+
+}
+
+.second{
+  grid-area: second;
+}
+
+.three {
+  grid-area: three;
+  overflow-y: auto;
+}
+
+/* loading loader */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #FFF;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: #198754 transparent;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
 
 /* Remove blue glow and focus box shadow for all AntD inputs */
 .ant-input:focus,

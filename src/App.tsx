@@ -8,6 +8,10 @@ import { UseDataContext } from "./Context/UseDataContext";
 import { useEffect } from "react";
 import { bookedDatesType, BookingFormValues } from "./Shared/Types";
 import dayjs from "dayjs";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { UseAuthContext } from "./Context/UseAuthContext";
+import AdminLayout from "./Admin/AdminLayout";
+import { Admin } from "./Admin/Admin";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -24,10 +28,31 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const bookingDateRef = collection(db, 'bookingDates');
 export const bookingDataRef = collection(db, 'bookingData');
+export const auth = getAuth();
 
 
 function App() {
+  const {user, dispatch:transmit, loading:userloading} = UseAuthContext();
   const {dispatch} = UseDataContext();
+  //useeffect for auth
+
+  //use efffeevt for user
+  useEffect(()=>{
+    transmit({type:'loading', payload:true});
+    const unSubscribe = onAuthStateChanged(auth, user=>{
+      if(user){
+        transmit({type:'getUser', payload:user});
+        console.log('signed in', user);
+        transmit({type:'loading', payload:false});
+      }else{
+        transmit({type:'getUser', payload:null});
+        console.log('logged out')
+        transmit({type:'loading', payload:false});
+      }
+    });
+    return ()=>unSubscribe()
+  },[]);
+console.log("Current user in component:", user);
   //useEffect for booking dates 
   useEffect(() => {
   dispatch({ type: 'setloading', payload: true });
@@ -84,11 +109,20 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
+      <>
       <Route path="/tayclean" element={<Layout/>}>
         <Route index element={<Home/>}/>
         <Route path=":id" element={<BookingPage/> }/>
 
       </Route>
+      <Route path="/admin" element= {<AdminLayout/>}>
+      <Route index element={<Admin/>}/>
+
+      </Route>
+      </>
+
+
+
     )
   )
   return (
