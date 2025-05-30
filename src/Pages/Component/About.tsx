@@ -20,20 +20,22 @@ export const About = ()=>{
                 
                     
                 
-                    <div className="row">
-                        <div className="col-md-6">
-                        <div style={{...styles.background,height:'100%'}} className='background'>
+                    <div className="row" style={{padding:'0', margin:'0'}}>
+                    
+                        
+                        <div className="col-md-6" style={{padding:"0"}}>
+                        <div style={{...styles.background,height:'100%', width:"100%"}} className='background'>
 
                         </div>
                     </div>
                     <div  className='col-md-6' style={{...styles.content, textAlign:"center"}}>
                         
-                            <div className="container-fluid">
+                            <div className="">
                                 <h2>About Us</h2>
                                 <p className='animate-right'>
                                     Tay's cleaning services headquartered in Lagos State believes that every touch in your residential and Commercial
                                     buildings is aimed at leaving a spotless space, suitable for your comfort and relaxation.
-                            </p>
+                                </p>
                         
                             </div>
                     </div>

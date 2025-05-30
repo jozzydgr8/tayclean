@@ -176,7 +176,7 @@ nav .container-fluid{
   height: 40px;
   border-radius: 50%;
   border: 3px solid;
-  border-color: #198754 transparent;
+  border-color: var(--color-teal-blue) transparent;
 }
 
 @keyframes rotation {

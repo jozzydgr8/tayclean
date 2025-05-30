@@ -128,6 +128,8 @@ const BookingPage: React.FC = () => {
               rules={[{ required: true, message: 'Please select a date' }]}
             >
               <DatePicker
+                allowClear={false}
+                inputReadOnly
                 disabledDate={disabledDate}
                 style={{ width: '100%' }}
               />
@@ -138,7 +140,9 @@ const BookingPage: React.FC = () => {
             label="Preferred Time"
             rules={[{ required: true, message: 'Please select a preferred time' }]}
             >
-              <TimePicker use12Hours format="h:mm A" style={{ width: '100%' }} />
+              <TimePicker 
+              allowClear={false}
+              inputReadOnly use12Hours format="h:mm A" style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item>

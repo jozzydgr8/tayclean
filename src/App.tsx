@@ -12,6 +12,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { UseAuthContext } from "./Context/UseAuthContext";
 import AdminLayout from "./Admin/AdminLayout";
 import { Admin } from "./Admin/Admin";
+import Session from "./Pages/Session";
+import { ProtectedRoutes } from "./Shared/ProtectedRoutes";
+import { GuestRoutes } from "./Shared/GuestRoutes";
+import { Loading } from "./Shared/Loading";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -33,7 +37,7 @@ export const auth = getAuth();
 
 function App() {
   const {user, dispatch:transmit, loading:userloading} = UseAuthContext();
-  const {dispatch} = UseDataContext();
+  const {dispatch, loading} = UseDataContext();
 
   //useEffect for animation
    useEffect(()=>{
@@ -162,7 +166,8 @@ console.log("Current user in component:", user);
 
       </Route>
       <Route path="/admin" element= {<AdminLayout/>}>
-      <Route index element={<Admin/>}/>
+      <Route index element={<ProtectedRoutes user={user}><Admin/></ProtectedRoutes>}/>
+      <Route path="session" element= {<GuestRoutes user={user}><Session/></GuestRoutes>}/>
 
       </Route>
       </>
@@ -171,6 +176,9 @@ console.log("Current user in component:", user);
 
     )
   )
+  if(userloading || loading){
+    return <Loading/>
+  }
   return (
     <div className="App">
       <RouterProvider router={router}/>
