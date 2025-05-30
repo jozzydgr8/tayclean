@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tayclean/static/css/main.b67e3429.css",
-    "main.js": "/tayclean/static/js/main.8f0e9887.js",
+    "main.css": "/tayclean/static/css/main.de6dda05.css",
+    "main.js": "/tayclean/static/js/main.6c6a7411.js",
     "static/js/453.d2b87a87.chunk.js": "/tayclean/static/js/453.d2b87a87.chunk.js",
     "static/media/housebackground.jpg": "/tayclean/static/media/housebackground.126defae3502e0650a93.jpg",
     "static/media/commercialcleaningservice.jpg": "/tayclean/static/media/commercialcleaningservice.814461ffe7da5f62bae1.jpg",
@@ -11,12 +11,12 @@
     "static/media/cleaningwindow.jpg": "/tayclean/static/media/cleaningwindow.2e3d29dc4737c08c06d8.jpg",
     "static/media/cleaningsofa.jpg": "/tayclean/static/media/cleaningsofa.d401e0286a927c02c9b4.jpg",
     "index.html": "/tayclean/index.html",
-    "main.b67e3429.css.map": "/tayclean/static/css/main.b67e3429.css.map",
-    "main.8f0e9887.js.map": "/tayclean/static/js/main.8f0e9887.js.map",
+    "main.de6dda05.css.map": "/tayclean/static/css/main.de6dda05.css.map",
+    "main.6c6a7411.js.map": "/tayclean/static/js/main.6c6a7411.js.map",
     "453.d2b87a87.chunk.js.map": "/tayclean/static/js/453.d2b87a87.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b67e3429.css",
-    "static/js/main.8f0e9887.js"
+    "static/css/main.de6dda05.css",
+    "static/js/main.6c6a7411.js"
   ]
 }
