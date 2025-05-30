@@ -35,8 +35,7 @@ export const Footer = ()=>{
                 <div className='footer-icons'>
                     <a href='https://wa.link/o2oy0h' target='_blank'><WhatsAppOutlined/></a>
                     <a href='https://www.instagram.com/blossomcakes_delights_ng/' target='_blank'><InstagramOutlined/></a>
-                    <a><FacebookOutlined/></a>
-                    <a><XOutlined/></a>
+                    
                 </div>
                 <br/> <br/>
                 <small>© Tayclean 2025</small>

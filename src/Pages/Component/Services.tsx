@@ -16,7 +16,7 @@ export const Services = ()=>{
                             height:'200px', backgroundSize:"cover",
                              backgroundPosition:"center center", backgroundRepeat:"no-repeat"}}></div>
                             <div>
-                                <h3>{service.title}</h3>
+                                <h3 style={{textTransform:'capitalize'}}>{service.title}</h3>
                                 <p>{service.description}</p>
                                 <div>
                                     <FlatButton className="successbutton" onClick={()=>{}} title={`BOOK NOW - ₦${service.cost}`}/>

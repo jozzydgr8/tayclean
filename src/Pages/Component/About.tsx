@@ -9,23 +9,23 @@ export const About = ()=>{
             backgroundSize:'contain'
         },
         content:{
-            minHeight:'200px',
-            display:"flex",
-            justifyContent:'denter',
-            marginTop:'12px'
+            // minHeight:'200px',
+            // display:"flex",
+            // justifyContent:'center',
+            // alignItems:"center"
         }
     }
     return(
         <section style={{background:'#587c3d', color:'white'}}>
                 <div className="container-fluid">
                     <h2>About Us</h2>
-                <div className="row" >
-                    <div className="col-md-6">
+                
+                    {/* <div className="col-md-6">
                         <div style={styles.background} className='background' >
 
                         </div>
-                    </div>
-                    <div className="col-md-6" style={styles.content}>
+                    </div> */}
+                    <div style={{...styles.content, textAlign:"center"}}>
                         
                             <p>
                             Tay's cleaning services headquartered in Lagos State believes that every touch in your residential and Commercial
@@ -33,7 +33,7 @@ export const About = ()=>{
                             </p>
                         
                     </div>
-                </div>
+                
                 </div>
             
         </section>
