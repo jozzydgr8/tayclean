@@ -9,7 +9,8 @@ export interface BookingFormValues {
   email: string;
   date: Dayjs;
   address:string;
-  phone:string
+  phone:string;
+  time:Dayjs;
 }
 
 

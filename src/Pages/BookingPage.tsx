@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, DatePicker, message, Row, Col, Card, Divider, Button } from 'antd';
+import { Form, Input, DatePicker, message, Row, Col, Card, Divider, Button, TimePicker } from 'antd';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import type { FormProps } from 'antd';
@@ -24,34 +24,36 @@ const BookingPage: React.FC = () => {
   }, [data, navigate]);
 
   const onFinish: FormProps<BookingFormValues>['onFinish'] = async (values) => {
-    const selectedDate = dayjs(values.date).format('YYYY-MM-DD');
+  const selectedDate = dayjs(values.date).format('YYYY-MM-DD');
+  const selectedTime = dayjs(values.time).format('h:mm A'); // <-- format the time
 
-    if (bookedDates?.some((d) => d.date === selectedDate)) {
-      message.error('Sorry, this date is already booked.');
-      return;
-    }
+  if (bookedDates?.some((d) => d.date === selectedDate)) {
+    message.error('Sorry, this date is already booked.');
+    return;
+  }
 
-    try {
-      await addDoc(bookingDateRef, { date: selectedDate });
+  try {
+    await addDoc(bookingDateRef, { date: selectedDate });
 
-      await addDoc(bookingDataRef, {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
-        address: values.address,
-        date: selectedDate,
-        state: 'Lagos',
-        country: 'Nigeria',
-        title:data?.title,
-        totalPrice:data?.cost,
-      });
+    await addDoc(bookingDataRef, {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      address: values.address,
+      date: selectedDate,
+      time: selectedTime, // <-- include time
+      state: 'Lagos',
+      country: 'Nigeria',
+      title: data?.title,
+      totalPrice: data?.cost,
+    });
 
-      message.success('Booking successful!');
-    } catch (error) {
-      console.error('Booking error:', error);
-      message.error('Something went wrong. Please try again.');
-    }
-  };
+    message.success('Booking successful!');
+  } catch (error) {
+    console.error('Booking error:', error);
+    message.error('Something went wrong. Please try again.');
+  }
+};
 
   const disabledDate = (current: Dayjs): boolean => {
     const formatted = current.format('YYYY-MM-DD');
@@ -130,8 +132,17 @@ const BookingPage: React.FC = () => {
                 style={{ width: '100%' }}
               />
             </Form.Item>
+
+            <Form.Item
+            name="time"
+            label="Preferred Time"
+            rules={[{ required: true, message: 'Please select a preferred time' }]}
+            >
+              <TimePicker use12Hours format="h:mm A" style={{ width: '100%' }} />
+            </Form.Item>
+
             <Form.Item>
-            <Button style={{background:'#587c3d', color:'white'}} htmlType="submit" block>
+            <Button style={{background:'#2ac1aa', color:'white'}} htmlType="submit" block>
               Book Cleaning
             </Button>
           </Form.Item>

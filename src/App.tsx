@@ -93,6 +93,7 @@ console.log("Current user in component:", user);
           date: docData.date,
           address:docData.address,
           phone:docData.phone,
+          time:docData.time
         };
       });
 

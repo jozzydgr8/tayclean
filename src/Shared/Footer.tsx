@@ -17,7 +17,7 @@ export const Footer = ()=>{
 
                     <div className="col-md-4">
                         <h4>Contact Section</h4>
-                        Email: <a href='mailto'>taycleaningservices@gmail.com</a> <br/> <br/>
+                        Email: <a href='mailto'>taycleaningsservices@gmail.com</a> <br/> <br/>
                         Phone No: <a href=''>+234 888 888 8888</a><br/><br/>
                         Phone No: <a href=''>+234 888 888 8888</a><br/><br/>
                        

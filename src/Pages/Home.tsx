@@ -1,3 +1,4 @@
+import { Footer } from "../Shared/Footer"
 import { About } from "./Component/About"
 import { Book } from "./Component/Book"
 import { Choose } from "./Component/Choose"
@@ -14,6 +15,7 @@ export const Home = ()=>{
         {/* <Help/> */}
         <Choose/>
         <Book/>
+        <Footer/>
         </>
     )
 }

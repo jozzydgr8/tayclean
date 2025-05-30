@@ -16,18 +16,15 @@ function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+          <NavLink className="nav-link active" aria-current="page" to="/tayclean">Home</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/news">About Us</NavLink>
+          <NavLink className="nav-link active" aria-current="page" to="/tayclean">About Us</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/sendform">Services</NavLink>
+          <NavLink className="nav-link active" aria-current="page" to="/tayclean">Services</NavLink>
         </li>
         
-        <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/donate">Blogs</NavLink>
-        </li>
 
         <li className="nav-item">
           <FlatButton onClick={()=>{}} title='Contact Us' className='successbutton'/>

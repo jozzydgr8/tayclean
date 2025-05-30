@@ -57,6 +57,14 @@ export const Order = () => {
             <div>
               <Title level={5}>Customer Info</Title>
               <Text>
+                <strong>Date:</strong> {selectedRow.date}
+              </Text>
+              <br/>
+              <Text>
+                <strong>Time:</strong> {selectedRow.time}
+              </Text>
+              <br/>
+              <Text>
                 <strong>Name:</strong> {selectedRow.name}
               </Text>
               <br />
@@ -68,10 +76,6 @@ export const Order = () => {
                 <strong>Order ID:</strong> {selectedRow.id}
               </Text>
                 <br/>
-               <Text>
-                <strong>Date:</strong> {selectedRow.date}
-              </Text>
-              <br/>
                <Text>
                 <strong>Address:</strong> {selectedRow.address}
               </Text>

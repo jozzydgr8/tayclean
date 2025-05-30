@@ -24,7 +24,7 @@ a{
   text-decoration: none;
 }
 .successbutton, .successbutton:hover{
-  background: var(--color-dark-green) !important;
+  background: var(--color-teal-blue) !important;
   color: white;
 }
 .nocolorbutton{
@@ -32,7 +32,7 @@ a{
 }
 
 #footer{
-  background: var(--color-dark-green);
+  background: var(--color-teal-blue);
   color: white;
 }
 h2{
@@ -81,7 +81,7 @@ nav .container-fluid{
 
 
 .servicegrid > div, .servicegridcontent{
-  background-color: var(--color-dark-green);
+  background-color: var(--color-teal-blue);
   color: white;
   padding: 15px;
   flex: 1 1 250px;

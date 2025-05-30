@@ -18,10 +18,9 @@ export default function AdminLayout(){
             </div>
             {/* Header */}
             <div className="second">
-             <h1 className="text-center" style={{
-                color:'#198754',
+             <h2 className="text-center" style={{
                 paddingTop:'20px',
-             }}>Welcome to TayCleaning Services Admin </h1>
+             }}>Welcome to Tay'sCleaning Services Admin </h2>
             </div>
             {/* Outlet */}
             <div className="three">
