@@ -7,11 +7,11 @@ export const Services = ()=>{
         <section>
             <div className="container-fluid">
                 <h2>Our Services</h2>
-                <div className="servicegrid">
+                <div className="servicegrid ">
                 {
                     service.map((service, index)=>(
                         <Link to={`${service.id}`}
-                        key={index} className='servicegridcontent' style={{ border:'solid 1px #d7d9d6', color:"black", borderRadius:"20px", background:'white'}}>
+                        key={index} className='servicegridcontent animate-up' style={{ border:'solid 1px #d7d9d6', color:"black", borderRadius:"20px", background:'white'}}>
                             <div style={{backgroundImage:`url(${service.image})`,
                             height:'200px', backgroundSize:"cover",
                              backgroundPosition:"center center", backgroundRepeat:"no-repeat"}}></div>

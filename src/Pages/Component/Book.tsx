@@ -3,7 +3,7 @@ export const Book = ()=>{
         <section>
             <div className="container-fluid">
                 <h2>Eco-Friendly Cleaning Service</h2>
-                <p style={{textAlign:"center"}}>
+                <p style={{textAlign:"center"}} className="animate-down">
                     Our mission is to provide the best service that drives change across the cleaning service
                     industry and our client relationships.
                      {/* Tay's Cleaning services, well worth the fees, will 

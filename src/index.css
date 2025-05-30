@@ -189,6 +189,77 @@ nav .container-fluid{
 } 
 
 /* Remove blue glow and focus box shadow for all AntD inputs */
+/* Base picker styling */
+.ant-picker {
+  height: 40px !important;
+  padding: 8px 12px !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: none !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove default blue glow and box shadow on focus */
+.ant-picker-focused,
+.ant-picker:hover,
+.ant-picker:focus {
+  border-color: #d9d9d9 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Input inside picker */
+.ant-picker input {
+  font-size: 16px !important;
+  padding: 0 !important; /* handled by container */
+  height: 100% !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Placeholder text styling */
+.ant-picker input::placeholder {
+  color: #999;
+  opacity: 1; /* to ensure consistent placeholder color */
+}
+
+/* Clear icon */
+.ant-picker-clear {
+  margin-right: 8px !important;
+}
+
+/* Suffix Icon (calendar / clock icon) */
+.ant-picker-suffix {
+  font-size: 18px !important;
+  color: #999;
+  padding-left: 8px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown panel (optional: you can style popup panel) */
+.ant-picker-dropdown {
+  border-radius: 6px !important;
+}
+
+/* Remove hover glow on dropdown triggers */
+.ant-picker:hover .ant-picker-input > input {
+  border-color: #d9d9d9 !important;
+  box-shadow: none !important;
+}
+
+/* If you want to style TimePicker panel similarly */
+.ant-picker-time-panel {
+  font-size: 16px !important;
+}
+
 .ant-input:focus,
 .ant-input-focused,
 .ant-input-affix-wrapper:focus,
@@ -293,4 +364,28 @@ input:-webkit-autofill {
   padding-right: 8px !important; /* or more if you want more space */
   display: flex;
   align-items: center;
+}
+
+/* animation animation */
+.sectionAnimationLeft{
+  scroll-behavior: smooth;
+  animation: backInLeft;
+  animation-duration: 1.5s;
+}
+.sectionAnimationDown{
+  scroll-behavior: smooth;
+  animation:fadeInDownBig;
+  animation-duration: 1.2s;
+}
+
+.sectionAnimationUp{
+  scroll-behavior: smooth;
+  animation:fadeInUpBig;
+  animation-duration: 1.2s;
+
+}
+.sectionAnimationRight{
+  scroll-behavior: smooth;
+  animation: backInRight;
+  animation-duration: 1.2s;
 }

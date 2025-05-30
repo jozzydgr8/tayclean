@@ -39,7 +39,7 @@ export const Choose = ()=>{
                                 Quality Service
                             </strong>
                             <br/>
-                            <small>
+                            <small className='animate-up'>
                                 We will remain consistent in delivering the desired service,
                                 promptly and effectively.
                             </small>
@@ -52,7 +52,7 @@ export const Choose = ()=>{
                                     Eco-Friendly Products
                                 </strong>
                                 <br/>
-                                <small>
+                                <small className='animate-up'>
                                     We will prioritize safe environments through our products to ensure living and 
                                     working spaces are condusive.
                                 </small>
@@ -63,7 +63,7 @@ export const Choose = ()=>{
                             <div>
                                 <strong style={styles.header}>100% Satisfaction</strong>
                                 <br/>
-                                <small>
+                                <small className='animate-up'>
                                     We will meet and exceed the expectations of our customers that ensures a high return rate in
                                     utilizing our services.
                                 </small>
