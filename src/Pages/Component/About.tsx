@@ -33,7 +33,7 @@ export const About = ()=>{
                             <div className="">
                                 <h2>About Us</h2>
                                 <p className='animate-right'>
-                                    Tay's cleaning services headquartered in Lagos State believes that every touch in your residential and Commercial
+                                    Tay's cleaning services headquartered in Lagos State believes that every touch in your residential and commercial
                                     buildings is aimed at leaving a spotless space, suitable for your comfort and relaxation.
                                 </p>
                         

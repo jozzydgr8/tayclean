@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import housebackground from '../../assets/housebackground.jpg'
-import { services } from "../../Shared/globals"
+import { service } from "../../Shared/globals"
+import { Link } from 'react-router-dom';
 
 export const Header= ()=>{
     useEffect(()=>{
@@ -26,9 +27,11 @@ export const Header= ()=>{
                     {/* <h3>Residential and Commercial Cleaning Service in Lagos</h3> */}
                     <div className="servicegrid">
                         {
-                            services.map((service, index)=>(
+                            service.map((data, index)=>(
                                 <div key={index} style={{textTransform:'uppercase'}}>
-                                    {service}
+                                    <Link to={`${data.id}`}>
+                                    {data.service}
+                                    </Link>
                                 </div>
                             ))
                         }
@@ -39,9 +42,9 @@ export const Header= ()=>{
                     <br/>
                     {/* <div className="servicegridsecond">
                         {
-                            services.slice(5,services.length).map((service, index)=>(
+                            services.slice(5,services.length).map((services, index)=>(
                                 <div key={index} className={index.toString()}>
-                                    {service}
+                                    {services}
                                 </div>
                             ))
                         }

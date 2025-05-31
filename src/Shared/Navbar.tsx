@@ -27,7 +27,7 @@ function Navbar() {
         
 
         <li className="nav-item">
-          <FlatButton onClick={()=>{}} title='Contact Us' className='successbutton'/>
+          <a href='https://wa.link/tzom43' target='_blank'><FlatButton onClick={()=>{}} title='Contact Us' className='successbutton'/></a>
         </li>
 
         
