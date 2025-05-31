@@ -18,7 +18,8 @@ export const service = [
     title: "General Residential cleaning",
     description: "From a basic home clean to a deep, clean, Our team of trained staff will leave you satisfied with a magic touch.",
     image: windowcleaning,
-    cost:'40,000'
+    cost:40000,
+    recurringCost:34000
   },
 
   {
@@ -26,7 +27,8 @@ export const service = [
     title: "Deep Residential cleaning",
     description: "From a basic home clean to a deep, clean, Our team of trained staff will leave you satisfied with a magic touch.",
     image: sofaCleaning,
-    cost:'55,000'
+    cost:55000,
+    recurringCost:46750
   },
 
   {
@@ -34,7 +36,8 @@ export const service = [
   title: "Event Cleaning",
   description: "To tired to clean up after an eventful ceremony? No worries, we are just a call away.",
   image: cleaners,
-  cost:'75,000'
+  cost:75000,
+  recurringCost:63750
   },
 
   {
@@ -42,7 +45,8 @@ export const service = [
     title: "Commercial cleaning",
     description: "Hire us to keep your office and working space sparkling clean at a very affordable price",
     image: cleaningService,
-    cost:'100,000'
+    cost:100000,
+    recurringCost:85000
   },
  
 ];

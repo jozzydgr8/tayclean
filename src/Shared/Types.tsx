@@ -11,6 +11,8 @@ export interface BookingFormValues {
   address:string;
   phone:string;
   time:Dayjs;
+  months:number,
+  bookingType:string
 }
 
 

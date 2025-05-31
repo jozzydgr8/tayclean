@@ -32,6 +32,7 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const bookingDateRef = collection(db, 'bookingDates');
 export const bookingDataRef = collection(db, 'bookingData');
+export const recurringSubscriptionsRef= collection(db, 'recurringSubscriptions');
 export const auth = getAuth();
 
 
@@ -142,7 +143,9 @@ console.log("Current user in component:", user);
           date: docData.date,
           address:docData.address,
           phone:docData.phone,
-          time:docData.time
+          time:docData.time,
+          months:docData.months,
+          bookingType:docData.bookingType,
         };
       });
 
