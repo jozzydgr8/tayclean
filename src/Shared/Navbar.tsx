@@ -19,10 +19,10 @@ function Navbar() {
           <NavLink className="nav-link active" aria-current="page" to="/tayclean">Home</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/tayclean">About Us</NavLink>
+          <a className="nav-link active" aria-current="page" href="/tayclean#about">About Us</a>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/tayclean">Services</NavLink>
+          <a className="nav-link active" aria-current="page" href="/tayclean#service">Services</a>
         </li>
         
 

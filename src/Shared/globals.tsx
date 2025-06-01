@@ -26,7 +26,7 @@ export const service = [
   {
     id:"1",
     title: "Deep Residential cleaning",
-    description: "From a basic home clean to a deep clean, Our team of trained staff will leave you satisfied with a magic touch.",
+    description: "From everyday mess to hidden grime, our expert cleaners deliver a deep clean that leaves your home feeling fresh and renewed.",
     image: sofaCleaning,
     cost:55000,
     recurringCost:46750,
@@ -36,7 +36,7 @@ export const service = [
   {
   id:"4",
   title: "Event Cleaning",
-  description: "To tired to clean up after an eventful ceremony? No worries, we are just a call away.",
+  description: "Too tired to clean up after an eventful ceremony? No worries, we are just a call away.",
   image: cleaners,
   cost:75000,
   recurringCost:63750,

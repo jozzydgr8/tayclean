@@ -4,7 +4,7 @@ import { service } from "../../Shared/globals"
 
 export const Services = ()=>{
     return(
-        <section>
+        <section id="service">
             <div className="container-fluid">
                 <h2>Our Services</h2>
                 <div className="servicegrid ">
@@ -43,7 +43,7 @@ export const Services = ()=>{
                                 
                                 {/* This pushes the button to the bottom */}
                                 <div style={{ marginTop: 'auto' }}>
-                                <FlatButton className="successbutton" onClick={() => {}} title={`BOOK NOW - ₦${service.cost}`} />
+                                <FlatButton className="successbutton" onClick={() => {}} title={`BOOK NOW - ₦${service.cost.toLocaleString()}`} />
                                 </div>
                             </div>
                             </Link>

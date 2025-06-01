@@ -16,6 +16,7 @@ import Session from "./Pages/Session";
 import { ProtectedRoutes } from "./Shared/ProtectedRoutes";
 import { GuestRoutes } from "./Shared/GuestRoutes";
 import { Loading } from "./Shared/Loading";
+import { ToastContainer } from "react-toastify";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -185,6 +186,17 @@ console.log("Current user in component:", user);
   return (
     <div className="App">
       <RouterProvider router={router}/>
+       <ToastContainer 
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light" // or "dark"
+    />
     </div>
   );
 }

@@ -16,7 +16,7 @@ export const About = ()=>{
         }
     }
     return(
-        <section style={{background:'#587c3d', color:'white'}}>
+        <section style={{background:'#587c3d', color:'white'}} id='about'>
                 
                     
                 
