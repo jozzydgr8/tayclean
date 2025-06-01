@@ -56,9 +56,17 @@ const BookingPage: React.FC = () => {
   }, [data, navigate]);
 
   const disabledDate = (current: Dayjs): boolean => {
-    const formatted = current.format('YYYY-MM-DD');
-    return bookedDates?.some((d) => d.date === formatted) || false;
-  };
+  const formatted = current.format('YYYY-MM-DD');
+  
+  // Disable past dates
+  const isPast = current && current < dayjs().startOf('day');
+
+  // Disable already booked dates
+  const isBooked = bookedDates?.some((d) => d.date === formatted)?? false;
+
+  return isPast || isBooked;
+};
+
 
   function generateRecurringDates(
     selectedWeekdays: number[],
