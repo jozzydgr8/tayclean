@@ -72,7 +72,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
 
             <Form.Item label="Booking Type" name="bookingType" initialValue="recurring">
               <Radio.Group onChange={(e) => setIsRecurring(e.target.value === 'recurring')}>
-                <Radio value="recurring">Recurring (2x / month)</Radio>
+                <Radio value="recurring">Recurring (biweekly)</Radio>
                 <Radio value="one-time">One-Time</Radio>
               </Radio.Group>
             </Form.Item>
@@ -94,7 +94,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
                 </Form.Item>
 
                 <Form.Item
-                  label="Pick up to 2 days per Month"
+                  label="Pick up to 2 days preferred (monthly)"
                   required
                   validateStatus={selectedDays.length === 0 ? 'error' : ''}
                   help={

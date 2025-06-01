@@ -68,46 +68,35 @@ const BookingPage: React.FC = () => {
 };
 
 
-  function generateRecurringDates(
-    selectedWeekdays: number[],
-    startDate: string,
-    monthsCount: number = 3
-  ): string[] {
-    const result: string[] = [];
-    const start = dayjs(startDate);
+function generateRecurringDates(
+  selectedWeekdays: number[],
+  startDate: string,
+  monthsCount: number = 3
+): string[] {
+  const result: string[] = [];
+  let current = dayjs(startDate);
 
-    for (let monthOffset = 0; monthOffset < monthsCount; monthOffset++) {
-      const currentMonth = start.add(monthOffset, 'month');
-      const year = currentMonth.year();
-      const month = currentMonth.month(); // 0-indexed
-
-      const datesInMonth: string[] = [];
-
-      selectedWeekdays.forEach((weekdayIndex) => {
-        let date = dayjs(new Date(year, month, 1));
-        const monthEnd = date.endOf('month');
-
-        const matchedDates: string[] = [];
-
-        while (date.isBefore(monthEnd) || date.isSame(monthEnd, 'day')) {
-          if (date.day() === weekdayIndex) {
-            matchedDates.push(date.format('YYYY-MM-DD'));
-          }
-          date = date.add(1, 'day');
-        }
-
-        if (matchedDates.length >= 2) {
-          datesInMonth.push(matchedDates[0], matchedDates[2] || matchedDates[1]);
-        } else if (matchedDates.length === 1) {
-          datesInMonth.push(matchedDates[0]);
-        }
-      });
-
-      result.push(...datesInMonth.sort().slice(0, 2));
-    }
-
+  // Validate that start date matches one of the selected weekdays
+  if (!selectedWeekdays.includes(current.day())) {
     return result;
   }
+
+  for (let i = 0; i < monthsCount; i++) {
+    const firstSession = current;
+    const secondSession = current.add(14, 'day'); // 2 weeks later
+
+    result.push(firstSession.format('YYYY-MM-DD'));
+    result.push(secondSession.format('YYYY-MM-DD'));
+
+    // Move to the start date of the next month
+    current = current.add(1, 'month');
+  }
+
+  return result;
+}
+
+
+
   const calculateTotalCost = (values: BookingFormValues): number => {
   if (!values) return 0;
 
@@ -128,11 +117,27 @@ const BookingPage: React.FC = () => {
 };
 
   const onFinish = (values: BookingFormValues) => {
-  setDataSubmit(values);
+  const selectedStartDay = dayjs(values.date).day(); // returns 0-6 (Sun-Sat)
+  
+  if (values.bookingType === 'recurring') {
+    if (selectedDays.length === 0) {
+      toast.error('Please select at least one day of the week.');
+      return;
+    }
+
+    if (!selectedDays.includes(selectedStartDay)) {
+      const selectedDayNames = selectedDays.map(d => weekdays.find(w => w.value === d)?.label).join(', ');
+      toast.error(`The start date must fall on one of your selected days (${selectedDayNames}).`);
+      return;
+    }
+  }
+
   const cost = calculateTotalCost(values);
   setTotalCost(cost);
+  setDataSubmit(values);
   setProceedPayment(true);
 };
+
 
   const handleFinish = async () => {
   if (!dataSubmit) return;
@@ -216,7 +221,7 @@ const BookingPage: React.FC = () => {
   }
 };
 
-  const publicKey = process.env.REACT_APP_Pay_PublicKey || 'pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea'
+  const publicKey = 'pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea'
 
   const componentProp = {
         email:dataSubmit.email,

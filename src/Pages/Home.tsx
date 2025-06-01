@@ -10,8 +10,9 @@ export const Home = ()=>{
     return(
         <>
         <Header/>
-        <Services/>
         <About/>
+        <Services/>
+        
         {/* <Help/> */}
         <Choose/>
         <Book/>
