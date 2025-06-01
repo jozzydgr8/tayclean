@@ -28,7 +28,7 @@ export const Footer = ()=>{
                 <br/> <br/>
                 <div className='footer-icons'>
                     <a href='https://wa.link/tzom43' target='_blank'><WhatsAppOutlined/></a>
-                    <a href='https://www.instagram.com/tayscleaningservices?igsh=aWtvbWN3ZnV3MTBn&utm_source=qr' target='_blank'><InstagramOutlined/></a>
+                    <a href='https://www.instagram.com/taycleaningsservices?igsh=aWtvbWN3ZnV3MTBn&utm_source=qr' target='_blank'><InstagramOutlined/></a>
                     
                 </div>
                 <br/> <br/>

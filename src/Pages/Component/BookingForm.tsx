@@ -16,6 +16,7 @@ import { BookingFormValues } from '../../Shared/Types';
 import { Dayjs } from 'dayjs';
 import { PaystackButton } from 'react-paystack';
 type prop ={
+   
     proceedPayment:boolean,
     data: {
     id: string;
@@ -64,7 +65,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
         <Card
           title={`Book Service: ${data?.title}`}
           bordered={false}
-          style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+          style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)',textTransform:'capitalize' }}
         >
           <Form layout="vertical" onFinish={onFinish}>
             <Divider orientation="left">Booking Type</Divider>
@@ -83,7 +84,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
                   label="For how many months?"
                   rules={[{ required: true, message: 'Please select duration in months' }]}
                 >
-                  <Select placeholder="Select number of months" style={{ width: '100%' }}>
+                  <Select placeholder="Select number of months" style={{ width: '100%' }} showSearch={false}>
                     {Array.from({ length: 12 }, (_, i) => (
                       <Select.Option key={i + 1} value={i + 1}>
                         {i + 1} {i === 0 ? 'month' : 'months'}
@@ -206,7 +207,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
               label="Preferred Start Date"
               rules={[{ required: true, message: 'Please select a date' }]}
             >
-              <DatePicker style={{ width: '100%' }} disabledDate={disabledDate} />
+              <DatePicker inputReadOnly  style={{ width: '100%' }} disabledDate={disabledDate} />
             </Form.Item>
 
             <Form.Item
@@ -214,7 +215,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
               label="Preferred Time"
               rules={[{ required: true, message: 'Please select a time' }]}
             >
-              <TimePicker use12Hours format="h:mm A" style={{ width: '100%' }} />
+              <TimePicker inputReadOnly use12Hours format="h:mm A" style={{ width: '100%' }} />
             </Form.Item>
 
             {
