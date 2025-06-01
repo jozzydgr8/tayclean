@@ -9,9 +9,11 @@ import { Services } from "./Component/Services"
 export const Home = ()=>{
     return(
         <>
+        
         <Header/>
-        <About/>
         <Services/>
+        <About/>
+        
         
         {/* <Help/> */}
         <Choose/>
