@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Menu } from 'antd';
-import {QuestionCircleFilled, LogoutOutlined, HomeOutlined, UploadOutlined} from '@ant-design/icons'
+import {QuestionCircleFilled, LogoutOutlined, HomeOutlined, UploadOutlined, SettingOutlined} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import { MenuItem } from './Types';
 import { signOut } from 'firebase/auth';
@@ -15,17 +15,27 @@ export const SideNav: React.FC = () => {
     { label: 'Dashboard', key: '/admin' , icon :<HomeOutlined/>},
     { label: 'SignOut', key: 'signOut', icon :<LogoutOutlined/> },
     { label: 'Help', key: 'help', icon :<QuestionCircleFilled/> },
+    {label:'settings', key:'settings', icon : <SettingOutlined/>, children:[
+      {
+        label:"Update Password",
+        key:'/admin/settings/updatepassword'
+
+      }
+      // ,{
+      //   label:"Accept Admin",
+      //   key:'/admin/settings/accept'
+      // },{
+      //   label:'view admin users',
+      //   key:'/admin/settings/adminUsers'
+      // }
+    ]},
     
   ];
   const navigate = useNavigate();
   const{dispatch}=UseAuthContext();
 
   // Map the items array to the format required by the Menu component
-  const menuItems = items.map(item => ({
-    label: item.label,
-    key: item.key,
-    icon: item.icon
-  }));
+  const menuItems = items
 
   const handleSignOut = async()=>{
     dispatch({type:'loading', payload:true});

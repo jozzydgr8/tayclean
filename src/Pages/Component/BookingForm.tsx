@@ -94,7 +94,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
                 </Form.Item>
 
                 <Form.Item
-                  label="Pick up to 2 days per week"
+                  label="Pick up to 2 days per Month"
                   required
                   validateStatus={selectedDays.length === 0 ? 'error' : ''}
                   help={

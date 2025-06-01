@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from "react-router-dom";
 import { Layout } from "./Layout";
 import { Home } from "./Pages/Home";
 import BookingPage from "./Pages/BookingPage";
@@ -17,6 +17,7 @@ import { ProtectedRoutes } from "./Shared/ProtectedRoutes";
 import { GuestRoutes } from "./Shared/GuestRoutes";
 import { Loading } from "./Shared/Loading";
 import { ToastContainer } from "react-toastify";
+import UpdatePassword from "./Pages/UpdatePassword";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -159,7 +160,7 @@ console.log("Current user in component:", user);
     });
 
     return () => unSubscribe();
-  }, []);
+  }, [user]);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -172,6 +173,10 @@ console.log("Current user in component:", user);
       <Route path="/admin" element= {<AdminLayout/>}>
       <Route index element={<ProtectedRoutes user={user}><Admin/></ProtectedRoutes>}/>
       <Route path="session" element= {<GuestRoutes user={user}><Session/></GuestRoutes>}/>
+      <Route path="settings" element={<Outlet/>}>
+      <Route path="updatepassword" element={<UpdatePassword/>}/>
+
+      </Route>
 
       </Route>
       </>

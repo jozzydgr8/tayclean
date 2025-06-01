@@ -16,7 +16,7 @@ export const service = [
   {
     id:"2",
     title: "General Residential cleaning",
-    description: "From a basic home clean to a deep, clean, Our team of trained staff will leave you satisfied with a magic touch.",
+    description: "From a basic home clean, Our team of trained staff will leave you satisfied with a magic touch.",
     image: windowcleaning,
     cost:40000,
     recurringCost:34000,
@@ -46,7 +46,7 @@ export const service = [
   {
     id:'3',
     title: "Commercial cleaning",
-    description: "Hire us to keep your office and working space sparkling clean at a very affordable price",
+    description: "Hire us to keep your office and working space sparkling clean at a very affordable price.",
     image: cleaningService,
     cost:100000,
     recurringCost:85000,
