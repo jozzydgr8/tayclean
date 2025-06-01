@@ -16,13 +16,13 @@ function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to="/tayclean">Home</NavLink>
+          <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/tayclean#about">About Us</a>
+          <a className="nav-link active" aria-current="page" href="/#about">About Us</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/tayclean#service">Services</a>
+          <a className="nav-link active" aria-current="page" href="/#service">Services</a>
         </li>
         
 

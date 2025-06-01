@@ -51,7 +51,7 @@ const BookingPage: React.FC = () => {
 
   useEffect(() => {
     if (!data) {
-      navigate('/tayclean', { replace: true });
+      navigate('/', { replace: true });
     }
   }, [data, navigate]);
 
@@ -204,14 +204,15 @@ function generateRecurringDates(
       });
       toast.info(` ${values.bookingType} booking successful! for ${data?.title}`);
       message.success(`Recurring booking successful! Total: ₦${totalCost.toLocaleString()}`);
-      navigate('/tayclean');
+      navigate('/');
     } else {
       // (one-time booking Firestore writes...)
       toast.info(` ${values.bookingType} booking successful! for ${data?.title}`);
       message.success('Booking successful!');
-      navigate('/tayclean');
+      navigate('/');
     }
-    navigate('/tayclean');
+    toast.info(` ${values.bookingType} booking successful! for ${data?.title}`);
+    navigate('/');
   } catch (error) {
     console.error('Booking error:', error);
     message.error('Something went wrong. Please try again.');

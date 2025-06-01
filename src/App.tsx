@@ -165,7 +165,7 @@ console.log("Current user in component:", user);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-      <Route path="/tayclean" element={<Layout/>}>
+      <Route path="/" element={<Layout/>}>
         <Route index element={<Home/>}/>
         <Route path=":id" element={<BookingPage/> }/>
 
