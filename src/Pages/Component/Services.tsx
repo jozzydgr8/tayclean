@@ -38,7 +38,7 @@ export const Services = ()=>{
 
                             {/* Content section */}
                             <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '15px' }}>
-                                <h3 style={{ textTransform: 'capitalize' }}>{service.title}</h3>
+                                <h3 style={{ textTransform: 'capitalize' }} dangerouslySetInnerHTML={{ __html: service.title }}></h3>
                                 <p>{service.description}</p>
                                 
                                 {/* This pushes the button to the bottom */}
