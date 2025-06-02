@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
   Form,
-  Input,
-  DatePicker,
   message,
-  Row,
-  Col,
-  Card,
-  Divider,
-  Button,
-  TimePicker,
-  Radio,
-  Select,
 } from 'antd';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
-import type { FormProps } from 'antd';
 import { BookingFormValues } from '../Shared/Types';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../App';
@@ -24,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { service } from '../Shared/globals';
 import { BookingForm } from './Component/BookingForm';
 import { toast } from 'react-toastify';
+import { SendMessage } from '../Shared/SendMessage';
 
 const weekdays = [
   { label: 'Monday', value: 1 },
@@ -47,8 +37,10 @@ const BookingPage: React.FC = () => {
   const [dataSubmit, setDataSubmit] = useState({}as BookingFormValues);
   const [proceedPayment, setProceedPayment] = useState(false);
   const [totalCost, setTotalCost] = useState(0);
+  const {sendEmail} = SendMessage();
+  const [form] = Form.useForm();
 
-
+  
   useEffect(() => {
     if (!data) {
       navigate('/', { replace: true });
@@ -71,27 +63,43 @@ const BookingPage: React.FC = () => {
 function generateRecurringDates(
   selectedWeekdays: number[],
   startDate: string,
-  monthsCount: number = 3
+  monthsCount: number = 3,
+  bookedDates: { date: string }[] = []
 ): string[] {
   const result: string[] = [];
   let current = dayjs(startDate);
+  const bookedSet = new Set(bookedDates.map(d => d.date));
 
-  // Validate that start date matches one of the selected weekdays
   if (!selectedWeekdays.includes(current.day())) {
-    return result;
+    return result; // start date must match selected days
   }
 
   for (let i = 0; i < monthsCount; i++) {
-    const firstSession = current;
-    const secondSession = current.add(14, 'day'); // 2 weeks later
+    const baseDates = [current, current.add(14, 'day')];
 
-    result.push(firstSession.format('YYYY-MM-DD'));
-    result.push(secondSession.format('YYYY-MM-DD'));
+    for (let base of baseDates) {
+      let sessionDate = base;
 
-    // Move to the start date of the next month
+      let tries = 0;
+      while (
+        (bookedSet.has(sessionDate.format('YYYY-MM-DD')) ||
+         !selectedWeekdays.includes(sessionDate.day()))
+        && tries < 14 // max shift of 2 weeks
+      ) {
+        sessionDate = sessionDate.add(1, 'day');
+        tries++;
+      }
+
+      const finalDate = sessionDate.format('YYYY-MM-DD');
+      if (!bookedSet.has(finalDate)) {
+        result.push(finalDate);
+        bookedSet.add(finalDate); // to avoid reuse
+      }
+    }
+
     current = current.add(1, 'month');
   }
-
+  console.log(result)
   return result;
 }
 
@@ -108,7 +116,7 @@ function generateRecurringDates(
 
     // Generate recurring dates to count sessions (for cost calculation)
     const startDate = dayjs(values.date).format('YYYY-MM-DD');
-    const recurringDates = generateRecurringDates(selectedDays, startDate, months);
+    const recurringDates = generateRecurringDates(selectedDays, startDate, months, bookedDates??[]);
 
     return recurringCost * recurringDates.length;
   }
@@ -146,103 +154,124 @@ function generateRecurringDates(
   const values = dataSubmit;
   const selectedTime = dayjs(values.time).format('h:mm A');
   const isRecurringBooking = values.bookingType === 'recurring';
+  const body = {
+    recipient_email:values.email,
+    message: `Hi ${values.name},\n\nThank you for choosing TayCleaning Services!\n\nYour ${values.bookingType.toLowerCase()} booking for "${data?.title}" has been successfully confirmed.\n\nWe look forward to serving you.\n\nIf you have any questions, feel free to reply to this email.\n\nBest regards,\nThe TayCleaning Team`,
+    subject: `Your ${values.bookingType} Booking with TayCleaning is Confirmed!`
+
+  }
 
   try {
-    if (isRecurringBooking) {
-      // Use totalCost from state instead of recalculating
-      if (selectedDays.length === 0) {
-        message.error('Please select at least one day of the week.');
-        setLoading(false);
-        return;
-      }
+  if (isRecurringBooking) {
+    if (selectedDays.length === 0) {
+      message.error('Please select at least one day of the week.');
+      setLoading(false);
+      return;
+    }
 
-      const months = values.months || 1;
-      const startDate = dayjs(values.date).format('YYYY-MM-DD');
-      const recurringDates = generateRecurringDates(selectedDays, startDate, months);
+    const months = values.months || 1;
+    const startDate = dayjs(values.date).format('YYYY-MM-DD');
+    const recurringDates = generateRecurringDates(selectedDays, startDate, months, bookedDates??[]);
+    const totalSessions = recurringDates.length;
+    const recurringCost = data?.recurringCost || 0;
 
-      // (validation and Firestore writes...)
-
-      // Use totalCost from state here
-      const totalSessions = recurringDates.length;
-      const recurringCost = data?.recurringCost || 0;
-
-      for (const date of recurringDates) {
-        await setDoc(doc(db, 'bookingDates', date), { date });
-        await setDoc(doc(db, 'bookingData', `${values.email}_${date}`), {
-          name: values.name,
-          email: values.email,
-          phone: values.phone,
-          address: values.address,
-          date,
-          time: selectedTime,
-          state: 'Lagos',
-          country: 'Nigeria',
-          title: data?.title,
-          totalPrice: recurringCost,
-          bookingType: 'Recurring',
-          isRecurring: true,
-        });
-      }
-
-      await setDoc(doc(db, 'recurringSubscriptions', `${values.email}_${recurringDates[0]}`), {
+    for (const date of recurringDates) {
+      await setDoc(doc(db, 'bookingDates', date), { date });
+      await setDoc(doc(db, 'bookingData', `${values.email}_${date}`), {
         name: values.name,
         email: values.email,
         phone: values.phone,
         address: values.address,
-        serviceId: data?.id,
-        title: data?.title,
-        recurringCost,
-        totalCost,
-        numberOfMonths: months,
-        totalSessions,
-        subscriptionStart: recurringDates[0],
-        subscriptionEnd: recurringDates[recurringDates.length - 1],
-        sessionDates: recurringDates,
+        date,
+        time: selectedTime,
         state: 'Lagos',
         country: 'Nigeria',
-        status: 'active',
+        title: data?.title,
+        totalPrice: recurringCost,
+        bookingType: 'Recurring',
+        isRecurring: true,
       });
-      toast.info(` ${values.bookingType} booking successful! for ${data?.title}`);
-      message.success(`Recurring booking successful! Total: ₦${totalCost.toLocaleString()}`);
-      navigate('/');
-    } else {
-      // (one-time booking Firestore writes...)
-      toast.info(` ${values.bookingType} booking successful! for ${data?.title}`);
-      message.success('Booking successful!');
-      navigate('/');
     }
-    toast.info(` ${values.bookingType} booking successful! for ${data?.title}`);
-    navigate('/');
-  } catch (error) {
-    console.error('Booking error:', error);
-    message.error('Something went wrong. Please try again.');
-  } finally {
-    setLoading(false);
-    
+
+    await setDoc(doc(db, 'recurringSubscriptions', `${values.email}_${recurringDates[0]}`), {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      address: values.address,
+      serviceId: data?.id,
+      title: data?.title,
+      recurringCost,
+      totalCost,
+      numberOfMonths: months,
+      totalSessions,
+      subscriptionStart: recurringDates[0],
+      subscriptionEnd: recurringDates[recurringDates.length - 1],
+      sessionDates: recurringDates,
+      state: 'Lagos',
+      country: 'Nigeria',
+      status: 'active',
+    });
+
+    console.log(`Recurring booking successful! Total: ₦${totalCost.toLocaleString()}`);
+  } else {
+    // One-time booking logic...
+    console.log('Booking successful!');
+  }
+  await sendEmail(body);
+
+  form.resetFields();
+  setDataSubmit({} as BookingFormValues);
+  setSelectedDays([]);
+  setProceedPayment(false);
+  toast.success(`${values.bookingType} booking successful for ${data?.title}`);
+   console.log('Booking finished successfully. Navigating now...');
+
+
+  
+} catch (error) {
+  console.error('Booking error:', error);
+  message.error('Something went wrong. Please try again.');
+} finally {
+  setLoading(false);
+  navigate('/')
+}
+
+};
+
+  // const publicKey = process.env.REACT_APP_Pay_PublicKey!;
+  const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
+
+  const componentProp = {
+  email: dataSubmit.email,
+  amount: totalCost * 100,
+  metadata: {
+    custom_fields: [
+      {
+        display_name: "Full Name",
+        variable_name: "name",
+        value: dataSubmit.name
+      },
+      {
+        display_name: "Phone Number",
+        variable_name: "phone",
+        value: dataSubmit.phone
+      }
+    ]
+  },
+  publicKey,
+  text: `Pay now ₦${totalCost.toLocaleString()}`,
+  onSuccess: () => {
+    handleFinish();
+  },
+  onClose: () => {
+    alert('You have closed the payment modal');
   }
 };
 
-  const publicKey = process.env.REACT_APP_Pay_PublicKey!;
-
-  const componentProp = {
-        email:dataSubmit.email,
-        amount: totalCost * 100 ,
-        metaData: {
-            name:dataSubmit.name,
-            phone:dataSubmit.phone
-        },
-        publicKey,
-        text: `Pay now ₦${totalCost.toString()}`,
-        onSuccess: () => {
-            handleFinish();
-        },
-        onClose: () => {
-            alert('You have closed the payment modal');
-        }
-    };
-  // ({weekdays,data, onFinish, setIsRecurring, isRecurring, setSelectedDays, selectedDays, disabledDate, loading}:prop)=>{
+  
   return (
     <BookingForm
+    form={form}
     onFinish={onFinish}
     weekdays={weekdays}
     data={data}

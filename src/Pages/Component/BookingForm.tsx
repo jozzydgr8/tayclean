@@ -11,12 +11,13 @@ import {
   TimePicker,
   Radio,
   Select,
+  FormInstance,
 } from 'antd';
 import { BookingFormValues } from '../../Shared/Types';
 import { Dayjs } from 'dayjs';
 import { PaystackButton } from 'react-paystack';
 type prop ={
-   
+    form: FormInstance<any>
     proceedPayment:boolean,
     data: {
     id: string;
@@ -41,15 +42,19 @@ loading:boolean,
 componentProp: {
     email: string;
     amount: number;
-    metaData: {
-        name: string;
-        phone: string;
+    metadata: {
+        custom_fields: {
+            display_name: string;
+            variable_name: string;
+            value: string;
+        }[];
     };
     publicKey: string;
     text: string;
     onSuccess: () => void;
     onClose: () => void;
 }
+
 
 }
 const styles={
@@ -58,7 +63,7 @@ const styles={
             height: '50px',
         },
 }
-export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinish, setIsRecurring, isRecurring, setSelectedDays, selectedDays, disabledDate, loading}:prop)=>{
+export const BookingForm = ({form,componentProp,proceedPayment,weekdays,data, onFinish, setIsRecurring, isRecurring, setSelectedDays, selectedDays, disabledDate, loading}:prop)=>{
     return(
         <section style={{ padding: '40px 20px', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
       <div className="container" style={{ maxWidth: 900, margin: '0 auto' }}>
@@ -67,7 +72,10 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
           bordered={false}
           style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)',textTransform:'capitalize' }}
         >
-          <Form layout="vertical" onFinish={onFinish}>
+          <Form
+          disabled={loading}
+          form={form}
+           layout="vertical" onFinish={onFinish}>
             <Divider orientation="left">Booking Type</Divider>
 
             <Form.Item label="Booking Type" name="bookingType" initialValue="recurring">
@@ -227,7 +235,7 @@ export const BookingForm = ({componentProp,proceedPayment,weekdays,data, onFinis
                 </Form.Item>:
              <>
                     <small>You will be redirected to PayStack to make payments securely**</small>
-                    <PaystackButton className="btn btn-block w-100 btn-primary " {...componentProp} />
+                    <PaystackButton disabled={loading} className="btn btn-block w-100 btn-primary " {...componentProp} />
                     <div>
                         <img style={styles.logo} src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAKgAtAMBIgACEQEDEQH/xAAcAAEAAwEBAQEBAAAAAAAAAAAABgcIBQQDAgH/xABCEAABAwMBAwkEBQsEAwAAAAABAAIDBAURBgcSIRMUMUFRYXGBkRUiVaEWMkKCkyNSU3KSlKKxssHRYsLw8TNDc//EABoBAQACAwEAAAAAAAAAAAAAAAADBAECBQb/xAAyEQACAgIAAwYCCQUAAAAAAAAAAQIDBBEFEjETIUFRcbEiYRQygZGhwdHh8RUjQlLw/9oADAMBAAIRAxEAPwC8UREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAcH6aaY+O2/8AHan000x8dt/47VU2rdm9zsFPJW0sra+hjG89zW7skbe0t6wO0HyAUJXoaeFYt0eauxtFSV84vTRqO33GiucHL26rgqos434ZA8A9nBepZ12e3eaz6soHxyFsNTK2nnbng9rjgZ8CQf8AtaKXMz8P6LYop7TJqrO0WwvHc7pQWmFs1zrIaWJ7txr5nhoLsE449wK9ipLbLeefagitkTsxUDPfx1yPAJ9G7vqVphYv0m5Q8PEzZPkjss/6aaY+O2/8dq9ds1BZ7tO6C2XKmqpWt33MhkDiG5xnh4hZlV2bGrJzGwS3SZmJrg7Lc9UTchvqd4+GF0M3htONS58z34EVV0py1omN0vdqtDo23O4U1I6QEsE0gaXAdOM+IXi+memfj1v/AHhqqjbHXc61fzZpy2jp2Rkdjne+fk5qgqkxuDwtpjOUmmzWeQ4yaSNR2250N1gM9tq4aqFrtwvheHAO6cZHiF61Fdl9FzLRFuBHvTtdO7v3ySP4cLn7RNeN05i321rJbm9u84u4tgaegkdbj1DzPUDyvosp5Dpq7+//AJk/OlDmkTKurqS3wGevqoaaIfbmkDB6lRqq2kaUpnFvtPlSP0ML3j1AwqHuNfWXOqNVcamWpnP/ALJXZI7h2DuHBeddurgdaX9yTb+RWllPwRfcW0/SkjsOrpo+99NJj5Bd+16hs13OLbc6Wof07jJBvj7vSsyruaGoBcdYWinc3LRUiU8OpgL/APasX8GojByjJrS35/oZjkSb00aRREXmy4fGrqqejgfUVk8UELOLpJXhrW+JK5H0y0z8et37w1VHtXvzrvqWSjjkLqO3nk2NB90y/bd4/Z8u8qFLv43BozqU7JNNlWeTqWkjS1JqmwVtTHTUl4opp5DhkbJmlzj2ALsLLtorfZt2oq7OBTVDJTjsa4E/LK1CCCMg5BVHiOCsWUeV7TJKbe0T2f1ERc4mPzJGyWN0cjQ5jwWuB6wVl660TrbdKygeDmmnfFx6w1xAPmOK1GqH2vW7mWsZJ2jDK2Fk2ereHun+kHzXb4Jby2yr817FbJjuKZC2yPhc2WI7skZD2HsI4hanpJ2VVJDUR/Umja9vgRlZXWiNm9Zz3RNqfnJji5E/cJb/ACAVnjkN1wn5PX3/AMGmK+9o7V2r4bXbKqvqT+SponSOx0nAzgd6zHW1U1dWT1lSczTyOkkPe45Kt3bXeeb2qls8Tvfq38pLj9GwjA83Y/ZKpxScGo5KnY+svZGuTPcuXyPbZbbLeLvR22DIfUyhmR9kdLneQBPktN0lNFR0sNLTsDIYWNjjaOhrQMAeiqjYlZeUqKy9zN92Mc3gz+ccF59N0eZVl6jrvZlguNcPrU9NI9ve4NOB64VHi9zuvVMfD3ZLjx5YczM7aprvaWpLpWZy2WpfuH/SDut+QC5scb5pGQxDMkjgxg7STgL8gYAHSpBoGi9oaztMBblrZ+Vd4MBf/NoXopNU1N+EV7FNfFL1NBwRw2q0xxNGIKSnDQB1NY3/AAFmW4101zr6ivqTmapkMj+7PV4Do8lp24U/O6Cpps45aJ0eezIIWXJYZKeV8E7CyWJxZI09LXA4I9VxOB6bsk+vd+ZayvBH7pKeSrq4KWHHKzytiZvHA3nEAZ8yrttOyvT1JTsFwZNX1GPfe+VzG57mtI4eOVRzXOa4OY4tc05DgcEHtCtfSW1aPk46TUzHNeAGitibkO73tHEHvGfAK5xOGU4J0P111IqHDfxEjqdmOlJ2kMoZoHH7UVTJw8nEj5L46V2eQaa1EblBXPqIOQdGyOVg32OJHHeHA8AR0DpUxo6umrqZlTRTxzwPGWyRuDmnzC+6848zJ5XCU3p9d/uXOzhvaQXH1beW2DT1bcTjlI48RNP2pDwaPUhdhU9tsvfL11JZIXZZTjl5wPzyMNHk3J+8FnBx+3vjDw8fQWz5ItlZkucS57i5xOXOccknrJX9LXBgeWndJIDscCRjI+Y9QvyTgZPQFYWsdM+ydnmn5XRltTHKTPnpBmbvEHwLWt8l7C26NcoRf+T1+Bz4xbTfkV6RkEHrWldG1xuWlbVVuOXvpmB5/wBQGHfMFZrV37F67nGlJKV3TSVT2D9V2H59XO9FzeNV81Cl5P3JsZ6lonyIi8sXgq024W7lbTb7k0e9TTGJxH5rx1+bR6qy1wddW72ppG6UrW70nIGSMdr2e835gK1hW9lkQn8/2NLI80GjOCubYhWGXT9dSOdk09VvNHY1zR/cOVMA5GQpHpTUb7BQX1kTi2aspWxwkdT97GfJr3HyXquIUO+hwj17vcoUy5ZbZ89dXn27qmtrGO3oGO5GDs3GcAR4nLvNcJjHyPbHEwvkeQ1jG9LieAAX5AwMDoU22S2T2rqhtXK3NPb28s7sMh4MH83fdUs5QxaN+EUapOcvUuPS9oZYbBRW1mC6GMco4faeeLj5klR3bBXc00bJCDh1XPHCPDO+fk35qbqo9uddvVVqt7XcGMfO9viQ1p+T15bAi7syLl57/Mv2vlreirlYuxGi5bUFdWkcKamDB4vd/hhVdK6tidEYNN1VY4caqqO6e1rQB/VvL0HFLOTFl8+4p0Lc0WGq62i7PnXiV92sga2vI/LQE4E+OsHqd8j3KxUXlcfIsx588H3l+cFNaZlapp56SofT1UMkM8Zw+ORpa5viCvmtM37T1q1BByN1o2TYHuSfVez9Vw4hUhr3RsulKuJ0cpnoKgkQyOHvNI+y7HDPeOnjwGF6jD4nXkvka1Io2UOHf4HL03qO5abrBUW2chpP5WBxzHKO8dvf0haC0xfqXUdoiuNHlod7skZOTE8dLT/ziCD1rM6tHYZUyCqu1JkmIsjlA6g7JBPmMeii4viwnS7kviX4m2PY1Ll8C1a6rhoKKesqX7kEEbpJHdjQMlZju1wmu10qrjU/+WplMhH5uegeQwPJW9tnvfM7LBaYXYlrnb0mOqJhBPq7d8gVS604Lj8lbtfV+38mcme3ynd0PaPbeqqCjc3ehEnKzcOG4zic9xOG/eV1bSqLn2iLqzrii5cd24Q4/IFVNs91RbtK1FZU1tJU1E8zWxxmHdwxvSekjpOPRTKq2tWWpppaeW1XAslYWOH5PiCMH7S1z68mzKjOEdqOv1M1OCg031KfVl7Dq3k7tcqBx4TQNlaO9hwf6x6KswMADOcKT7NK00OtrY7ewyZ7oH94c0gD9rdXSzq+0xpx+Xt3kFT1NM0OiIvEnTCEAjB6ERAZh1Db/ZV9uFBjDaeoexn6mct/hIXgU82y27mmq2VjW4bXQNcT2vZ7p+W4oGvdYtva0xn5o5c48smj+LQGy6yextKQOlZu1NaecS56QD9UeTccO0lU1oyym/6loqBzcwl/KT//ACbxd68G/eWkgABgDAC4/G8jSjSvV/kWMaHWR/Vn7anW891vXYOW07WQN8hk/wATnLQD3NYxz3HDWjJPYFlq4VZr7hV1p6amd837Ti7+6h4HXuyU/Je/8G2U/hSPOeAytIaEofZ2kLTTlu6/m7ZHjsc/3j83FZ4t1GbhcKWhbnNTMyHI6t5wGfmtSMaGNDWjDWjAHYFPxyz4YQ+01xV3tkB13r6p0vqCloqemhqYTT8rOxzi13FxAw7q+qeo9IX0t+1fTlQwGr53RP6xJCXjyLMqstpNY6s1vdC7I5J4iY1wwcNaB6ZyfNRpS1cKosohzLT11RrK+ak9F/y7StJxs3hc3PPU1tNLk/wqsdomtG6qmp4KSB8NDTOLm8pjfkceGSB0ADOB3lQ5fwkAZJAHerGNwyiifPHbfzNJ3ymtM/qt/Yha5IbfcLrK0htS9sUWetrM5I83Y+6olo7Z9c7/ADRz1sclFbel0jxuvkHYwH+o8PFWXr24QaV0S+ntzWwOewUlKxnDdyOJHg0OOe1VuI5MbdYtT25Pv+RJTBx+OXgVDru9+39UVlYx29TsdyNP2cm3IBHicu81H0AwMBSzZjZWXnVkDZ4xJTUrTPK1zctdjg0H7xBx3FdOThjU78Iog75y9SJ7w7Qm8O0LT3sO0fCqH92Z/hPYdo+FUP7sz/C5P9dh/o/vLH0V+ZmEHPQvtSVLqKrgq4/r08rZW+LSCP5KfbZrTT2+7W6ppKeKCKeBzC2Jga3eY7OcDrw/5Ku11qLo5FSsS7mV5xcJaNVwyNmiZLGcse0Oae0FFH9nlbz/AEVaZc5cyAQuz05Z7n+1F4i2HZzcH4PR04va2SNERaGTn3WyWu8cl7UoYKrks8nyrM7ucZx6D0XP+hOmPgdD+EFIEUkbrIrUZNL1MOKfVHMten7RaJnzWy3U9LI9u650TMEjpwumiLWUpSe5PYSS6H4miZNE+KVodG9pa5p6wekLg/QfS/wOi/DUhRZhbOH1W0Gk+pxKTSOnqKpjqaW0UkU8Tt5kjWcWntC7aIsTnKb3J7CSXQ8lwtlBc4+TuNFT1TOoTRB+PVR6p2caUqHFxtYjJ/QzSMHoDhSxFvC+2v6kmvRmHGL6ohjNl+lGuyaOd/c6qk/sV2rXpSwWl7ZKC1UsUjeiQs3nj7xyV2UW08q+a1Kbf2hQiuiC592slsvIiF0ooaoRZ3BKM7uenHoF0EUMZOL3F6Zs1sj30I0v8Dovw10LTYrVZjKbXQQUplwJDE3G9jOM+pXRRSSutktSk2vUwopdEERFEZPBdbNbbwyNl0ooapsZJYJW53Sexc36EaX+B0X4akKKSN1kVqMml6mHFPqjy223UdqpRS26njp4AS4RxjABPSi9SLRtt7ZkIiLACIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiID//Z" alt='visa'/>
                         <img style={styles.logo} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8Lo9v29vYAnNkAoNoAntnm8/pKsuDY7PeMyuq93vJiuuQGo9vc7fgAm9iFx+nw8PD0+v3K5vWWzuuo1u7u9/xWtuLh8fksqt16w+eu2O8+rt/I5fQbp9xtvuVTteJu0xDnAAACzUlEQVR4nO3d7W7iMBBG4Zg4UBLqEj5aoC17/3e5VKv+XDb1xGO97DlXkEdEVTyO02a7eOy2zaJ57BYI5UOoH0L9EOqHUD+E+iHUD6F+CPVDqB9C/RDqh1A/hPoh1A+hfgj1Q6gfQv0Q6odQP4T6IdQPoX4I9UOoH0L9EE5o1xdtV1u470rX7qsKh24TStcNFYWHrrjvVtvXE5b/Ab+K79WEy9ZFGLpqwmeXmxQhQoQIESJEiBChTfjm9Fwaqgkbh9XhrWhZIBqFa5fbNFkmGdY1/imWB3ZnyxWa5zRD6mLRulR3TnP7a3NYF+0y2q6Peal+CPVDqN8MwnHpUEXh7j21DqUhF2kV7pPPYD/E3IdTo/Aj+fi+avMebozCkx8wdC8VhEfHnzCEzwpCrynGnxJChAgRIkSIECHCrN5chXk7UMa1heeTd1zVEF4dti2+6y41hKPfbZr7+p51irHcFN6Y+a7Nu0fnmLVdhpVD54/c62Neqh9C/RDqN4Nw+VQ0w6bMPML+M5U9MpOC5bSFXfji8Oyd1hWFvcviouY7UZ8ewBB/VRM67cxseL8UIUKECBEiRIgQ4b2cdmY2sZqw8TkVVHFt0ZxddmZqflNhjA7E+Gq5ROsU43gqvjOTrqYrtM/a+vNQtPWT7fqYl+qHUD+E+iH8Z8trzDsFs7JtuEzOKuxTzDw0E1vTR8omZxQ+W8b6mUdEfphRuDI9eKfjXIw72YSjbWcmHmZz/L2qU4zocZsivB9ChAjnCOH9ECJEOEd1haYX1iZW9ck784zIzzKunl5tqyfjJ6AmZRQuLT+i8WPrE7NOMXZtFzY5hZhMn2GbnHkSNa5PWTtK4Wr9lwATY5qoH0L9EOqHUD+E+iHUD6F+CPVDqB9C/RDqh1A/hPoh1A+hfgj1Q6gfQv0Q6odQP4T6IdQPoX4I9UOoH0L9EOqHUL//QbhdPHbb31z+UaDpp89iAAAAAElFTkSuQmCC" alt="paystack" />
