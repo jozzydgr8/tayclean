@@ -256,8 +256,8 @@ function generateRecurringDates(
 
 };
 
-  // const publicKey = process.env.REACT_APP_Pay_PublicKey!;
-  const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
+  const publicKey = process.env.REACT_APP_Pay_PublicKey!;
+  // const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
 
   const componentProp = {
   email: dataSubmit.email,
