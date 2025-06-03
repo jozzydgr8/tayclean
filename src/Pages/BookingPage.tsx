@@ -49,15 +49,32 @@ const BookingPage: React.FC = () => {
 
   const disabledDate = (current: Dayjs): boolean => {
   const formatted = current.format('YYYY-MM-DD');
-  
-  // Disable past dates
-  const isPast = current && current < dayjs().startOf('day');
 
-  // Disable already booked dates
-  const isBooked = bookedDates?.some((d) => d.date === formatted)?? false;
+  // Disallow today and past dates
+  const isBeforeTomorrow = current && current < dayjs().add(1, 'day').startOf('day');
 
-  return isPast || isBooked;
+  // Disallow already booked dates
+  const isBooked = bookedDates?.some((d) => d.date === formatted) ?? false;
+
+  return isBeforeTomorrow || isBooked;
 };
+
+const disabledTime = () => {
+  const disabledHours = () => {
+    const hours: number[] = [];
+    for (let i = 0; i < 24; i++) {
+      if (i < 4 || i >= 22) {
+        hours.push(i); // 0–3 (12am–3am), 22–23 (10pm–11pm)
+      }
+    }
+    return hours;
+  };
+
+  return {
+    disabledHours,
+  };
+};
+
 
 
 function generateRecurringDates(
@@ -70,22 +87,21 @@ function generateRecurringDates(
   let current = dayjs(startDate);
   const bookedSet = new Set(bookedDates.map(d => d.date));
 
+  // Ensure start date is on a preferred weekday
   if (!selectedWeekdays.includes(current.day())) {
-    return result; // start date must match selected days
+    return result; // invalid start date
   }
 
   for (let i = 0; i < monthsCount; i++) {
+    // Preferred schedule: 2 sessions per month starting from current
     const baseDates = [current, current.add(14, 'day')];
 
     for (let base of baseDates) {
       let sessionDate = base;
 
+      // Try shifting to the next available day (regardless of weekday)
       let tries = 0;
-      while (
-        (bookedSet.has(sessionDate.format('YYYY-MM-DD')) ||
-         !selectedWeekdays.includes(sessionDate.day()))
-        && tries < 14 // max shift of 2 weeks
-      ) {
+      while (bookedSet.has(sessionDate.format('YYYY-MM-DD')) && tries < 14) {
         sessionDate = sessionDate.add(1, 'day');
         tries++;
       }
@@ -93,13 +109,15 @@ function generateRecurringDates(
       const finalDate = sessionDate.format('YYYY-MM-DD');
       if (!bookedSet.has(finalDate)) {
         result.push(finalDate);
-        bookedSet.add(finalDate); // to avoid reuse
+        bookedSet.add(finalDate);
       }
     }
 
+    // Go to the next month from initial base, not shifted one
     current = current.add(1, 'month');
   }
   console.log(result)
+
   return result;
 }
 
@@ -283,6 +301,7 @@ function generateRecurringDates(
     loading={loading}
     proceedPayment={proceedPayment}
     componentProp={componentProp}
+    disabledTime={disabledTime}
 
     />
   );

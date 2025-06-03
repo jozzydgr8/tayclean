@@ -17,6 +17,9 @@ import { BookingFormValues } from '../../Shared/Types';
 import { Dayjs } from 'dayjs';
 import { PaystackButton } from 'react-paystack';
 type prop ={
+  disabledTime: () => {
+    disabledHours: () => number[];
+},
     form: FormInstance<any>
     proceedPayment:boolean,
     data: {
@@ -63,7 +66,7 @@ const styles={
             height: '50px',
         },
 }
-export const BookingForm = ({form,componentProp,proceedPayment,weekdays,data, onFinish, setIsRecurring, isRecurring, setSelectedDays, selectedDays, disabledDate, loading}:prop)=>{
+export const BookingForm = ({disabledTime,form,componentProp,proceedPayment,weekdays,data, onFinish, setIsRecurring, isRecurring, setSelectedDays, selectedDays, disabledDate, loading}:prop)=>{
     return(
         <section style={{ padding: '40px 20px', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
       <div className="container" style={{ maxWidth: 900, margin: '0 auto' }}>
@@ -223,7 +226,7 @@ export const BookingForm = ({form,componentProp,proceedPayment,weekdays,data, on
               label="Preferred Time"
               rules={[{ required: true, message: 'Please select a time' }]}
             >
-              <TimePicker inputReadOnly use12Hours format="h:mm A" style={{ width: '100%' }} />
+              <TimePicker inputReadOnly use12Hours format="h:mm A" style={{ width: '100%' }} disabledTime={disabledTime} />
             </Form.Item>
 
             {
