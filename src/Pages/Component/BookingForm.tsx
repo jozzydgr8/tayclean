@@ -45,11 +45,11 @@ loading:boolean,
 componentProp: {
     email: string;
     amount: number;
-    metadata: {
+     metadata: {
         custom_fields: {
             display_name: string;
             variable_name: string;
-            value: string;
+            value: string | undefined;
         }[];
     };
     publicKey: string;

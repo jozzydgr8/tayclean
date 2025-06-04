@@ -273,6 +273,26 @@ function generateRecurringDates(
         display_name: "Phone Number",
         variable_name: "phone",
         value: dataSubmit.phone
+      },
+      {
+        display_name: "Email Address",
+        variable_name: "email",
+        value: dataSubmit.email
+      },
+      {
+        display_name: "Address",
+        variable_name: "address",
+        value: dataSubmit.address
+      },
+      {
+        display_name: "Booking Type",
+        variable_name: "bookingType",
+        value: dataSubmit.bookingType
+      },
+      {
+        display_name: "Service Booked",
+        variable_name: "service",
+        value: data?.title
       }
     ]
   },
