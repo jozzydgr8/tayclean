@@ -76,7 +76,7 @@ export const BookingForm = ({disabledTime,form,componentProp,proceedPayment,week
           style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)',textTransform:'capitalize' }}
         >
           <Form
-          disabled={loading}
+          disabled={proceedPayment}
           form={form}
            layout="vertical" onFinish={onFinish}>
             <Divider orientation="left">Booking Type</Divider>

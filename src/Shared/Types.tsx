@@ -26,3 +26,8 @@ export type MenuItem = {
 
     }[]
   }
+  export type userProp={
+    name:string,
+    email:string,
+    phone:string
+  }

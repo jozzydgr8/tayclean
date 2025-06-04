@@ -2,14 +2,19 @@ import { Table, Modal, Divider, Typography, Space } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import { UseDataContext } from "../Context/UseDataContext";
 import { FlatButton } from "../Shared/FlatButton";
-import { BookingFormValues } from "../Shared/Types";
 import { OrderHooks } from "./Hooks/OrderHooks";
+import { MessageModal } from "./MessageModal";
+import { useState } from "react";
 
 const { Title, Text } = Typography;
 
 export const Order = () => {
   const { bookingData } = UseDataContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEmail, setSelectedEmail] = useState("");
   const { getColumnSearchProps, handleRowClick, selectedRow,setIsModalVisible, isModalVisible, } = OrderHooks();
+
+  
   
   const columns = [
     {
@@ -19,17 +24,25 @@ export const Order = () => {
       ...getColumnSearchProps("name"),
     },
     {
-      title: "OrderId",
-      dataIndex: "id",
-      key: "id",
-      render: (text: string) => `${text.slice(0, 7)}...`,
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       ...getColumnSearchProps("id"),
     },
     {
       title: "Message",
       dataIndex: "email",
       key: "email",
-      render: () => <MailOutlined />,
+      render: (email: string) => (
+      <MailOutlined
+        style={{ cursor: "pointer" }}
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent row click override
+          setSelectedEmail(email);
+          setIsModalOpen(true);
+        }}
+      />
+      ),      
       ...getColumnSearchProps("email"),
     },
   ];
@@ -41,7 +54,10 @@ export const Order = () => {
         columns={columns}
         rowKey="id"
         onRow={(record) => ({
-          onClick: () => handleRowClick(record),
+          onClick: () => {
+          handleRowClick(record);
+          setSelectedEmail(record.email);
+        }
         })}
       />
 
@@ -71,10 +87,6 @@ export const Order = () => {
               <Text>
                 <strong>Email:</strong> {selectedRow.email}
               </Text>
-              <br />
-              <Text>
-                <strong>Order ID:</strong> {selectedRow.id}
-              </Text>
                 <br/>
                <Text>
                 <strong>Address:</strong> {selectedRow.address}
@@ -101,14 +113,15 @@ export const Order = () => {
                 title="Settled"
               />
               <FlatButton
-                onClick={() => {}}
+                onClick={()=>setIsModalOpen(true)}
                 className="btn-outline-success"
-                title="Request Delivery"
+                title="Message"
               />
             </div>
           </Space>
         )}
       </Modal>
+      <MessageModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} selectedEmail={selectedEmail}/>
     </>
   );
 };

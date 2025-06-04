@@ -87,37 +87,52 @@ function generateRecurringDates(
   let current = dayjs(startDate);
   const bookedSet = new Set(bookedDates.map(d => d.date));
 
-  // Ensure start date is on a preferred weekday
   if (!selectedWeekdays.includes(current.day())) {
-    return result; // invalid start date
+    return result; // start date must match selected days
   }
 
   for (let i = 0; i < monthsCount; i++) {
-    // Preferred schedule: 2 sessions per month starting from current
+    // 2 sessions per month: base + base + 14 days
     const baseDates = [current, current.add(14, 'day')];
 
     for (let base of baseDates) {
       let sessionDate = base;
+      let found = false;
 
-      // Try shifting to the next available day (regardless of weekday)
-      let tries = 0;
-      while (bookedSet.has(sessionDate.format('YYYY-MM-DD')) && tries < 14) {
-        sessionDate = sessionDate.add(1, 'day');
-        tries++;
+      // Try each selected day of the week within the same week
+      for (let offset = 0; offset < 7; offset++) {
+        const tryDate = base.add(offset, 'day');
+        if (selectedWeekdays.includes(tryDate.day())) {
+          const tryFormatted = tryDate.format('YYYY-MM-DD');
+          if (!bookedSet.has(tryFormatted)) {
+            sessionDate = tryDate;
+            bookedSet.add(tryFormatted);
+            result.push(tryFormatted);
+            found = true;
+            break;
+          }
+        }
       }
 
-      const finalDate = sessionDate.format('YYYY-MM-DD');
-      if (!bookedSet.has(finalDate)) {
-        result.push(finalDate);
-        bookedSet.add(finalDate);
+      // If no matching preferred day found, fall to the next free day (up to 14 tries)
+      if (!found) {
+        let fallback = base;
+        let tries = 0;
+        while (bookedSet.has(fallback.format('YYYY-MM-DD')) && tries < 14) {
+          fallback = fallback.add(1, 'day');
+          tries++;
+        }
+        const final = fallback.format('YYYY-MM-DD');
+        bookedSet.add(final);
+        result.push(final);
       }
     }
 
-    // Go to the next month from initial base, not shifted one
+    // Move to next month
     current = current.add(1, 'month');
   }
-  console.log(result)
 
+  console.log(result);
   return result;
 }
 
@@ -192,7 +207,11 @@ function generateRecurringDates(
     const recurringDates = generateRecurringDates(selectedDays, startDate, months, bookedDates??[]);
     const totalSessions = recurringDates.length;
     const recurringCost = data?.recurringCost || 0;
-
+    if (recurringDates.length === 0) {
+      toast.error('No valid recurring dates could be generated.');
+      setLoading(false);
+      return;
+    }
     for (const date of recurringDates) {
       await setDoc(doc(db, 'bookingDates', date), { date });
       await setDoc(doc(db, 'bookingData', `${values.email}_${date}`), {
@@ -232,10 +251,37 @@ function generateRecurringDates(
 
     console.log(`Recurring booking successful! Total: ₦${totalCost.toLocaleString()}`);
   } else {
-    // One-time booking logic...
-    console.log('Booking successful!');
-  }
-  await sendEmail(body);
+  const date = dayjs(values.date).format('YYYY-MM-DD');
+  const oneTimeCost = data?.cost || 0;
+
+  await setDoc(doc(db, 'bookingDates', date), { date });
+
+  await setDoc(doc(db, 'bookingData', `${values.email}_${date}`), {
+    name: values.name,
+    email: values.email,
+    phone: values.phone,
+    address: values.address,
+    date,
+    time: selectedTime,
+    state: 'Lagos',
+    country: 'Nigeria',
+    title: data?.title,
+    totalPrice: oneTimeCost,
+    bookingType: 'One-time',
+    isRecurring: false,
+  });
+
+  console.log(`One-time booking successful! Total: ₦${oneTimeCost.toLocaleString()}`);
+}
+
+await setDoc(doc(db, 'users', values.email), {
+  email: values.email,
+  name: values.name,
+  phone: values.phone,
+  subscribedAt: new Date().toISOString(),
+},{merge:true});
+
+await sendEmail(body);
 
   form.resetFields();
   setDataSubmit({} as BookingFormValues);
@@ -251,13 +297,13 @@ function generateRecurringDates(
   message.error('Something went wrong. Please try again.');
 } finally {
   setLoading(false);
-  navigate('/')
+  return navigate('/');
 }
 
 };
 
-  const publicKey = process.env.REACT_APP_Pay_PublicKey!;
-  // const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
+  // const publicKey = process.env.REACT_APP_Pay_PublicKey!;
+  const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
 
   const componentProp = {
   email: dataSubmit.email,

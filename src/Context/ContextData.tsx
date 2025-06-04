@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { bookedDatesType, BookingFormValues } from "../Shared/Types";
+import { bookedDatesType, BookingFormValues, userProp } from "../Shared/Types";
 
 
 // Types
@@ -9,8 +9,13 @@ type State = {
   bookedDates: bookedDatesType[] | null;
   loading: boolean;
   bookingData:BookingFormValues[] | null;
+  user:userProp[] | null;
 };
 
+type useraction = {
+  type:'getUserData',
+  payload:userProp[] | null,
+}
 
 type LoadAction = {
   type: "setloading";
@@ -25,7 +30,7 @@ type bookingDatesAction = {
   type:'getBookingDates',
   payload: bookedDatesType[] | null
 }
-type Action = LoadAction | bookingDataAction | bookingDatesAction;
+type Action = LoadAction | bookingDataAction | bookingDatesAction | useraction;
 
 type ContextProps = State & {
   dispatch: React.Dispatch<Action>;
@@ -40,8 +45,10 @@ const initialState: State = {
   bookedDates: null,
   loading: false,
   bookingData:null,
+  user:null,
 
 };
+
 
 // Create Context with default value
 export const Context = createContext<ContextProps>({
@@ -58,6 +65,8 @@ const reducer = (state: State, action: Action): State => {
       return {...state, bookingData: action.payload};
     case "getBookingDates":
        return { ...state, bookedDates: action.payload };
+    case "getUserData":
+      return {...state, user: action.payload}
     default:
       return state;
   }

@@ -5,10 +5,18 @@ import { signOut } from "firebase/auth";
 import { auth } from "../App";
 import { useNavigate } from "react-router-dom";
 import { UseAuthContext } from "../Context/UseAuthContext";
+import { MessageModal } from "./MessageModal";
+import { useState } from "react";
+import { UseDataContext } from "../Context/UseDataContext";
 
 export const Admin = ()=>{
     const navigate = useNavigate();
     const {dispatch} = UseAuthContext();
+    const {user} = UseDataContext();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+     const [selectedEmail, setSelectedEmail] = useState<string | string[]>("");
+
+      const emails = user && user.map((user=>user.email))
     const handleSignOut = async()=>{
     dispatch({type:'loading', payload:true});
     try{
@@ -26,14 +34,13 @@ export const Admin = ()=>{
                 <Col>
                     <FlatButton 
                     title="Send Newsletter" 
-                    //   onClick={handleSendNewsletter} 
+                    onClick={()=>{
+                      setIsModalOpen(true);
+                      setSelectedEmail(emails ||[]);
+                      
+                    }}
                     className="successbutton" 
                     />
-                    {/* <SendMessage 
-                    isModalOpen={isModalOpen} 
-                    setIsModalOpen={setIsModalOpen} 
-                    selectedEmail={selectedEmails} 
-                    /> */}
                 </Col>
 
                 <Col>
@@ -46,6 +53,7 @@ export const Admin = ()=>{
                 </Row>
                 <br/>
                 <Order/>
+                <MessageModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} selectedEmail={selectedEmail}/>
             </div>
         </section>
     )

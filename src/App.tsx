@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import {collection, getFirestore, onSnapshot} from "firebase/firestore";
 import { UseDataContext } from "./Context/UseDataContext";
 import { useEffect } from "react";
-import { bookedDatesType, BookingFormValues } from "./Shared/Types";
+import { bookedDatesType, BookingFormValues, userProp } from "./Shared/Types";
 import dayjs from "dayjs";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { UseAuthContext } from "./Context/UseAuthContext";
@@ -35,6 +35,7 @@ export const db = getFirestore(app);
 export const bookingDateRef = collection(db, 'bookingDates');
 export const bookingDataRef = collection(db, 'bookingData');
 export const recurringSubscriptionsRef= collection(db, 'recurringSubscriptions');
+export const userRef = collection(db, 'users');
 export const auth = getAuth();
 
 
@@ -134,6 +135,9 @@ console.log("Current user in component:", user);
 }, []);
   //useEffect fot booking data
     useEffect(() => {
+      if(user?.uid !== process.env.REACT_APP_Accepted_Admin){
+        return
+      }
     dispatch({ type: 'setloading', payload: true });
     const unSubscribe = onSnapshot(bookingDataRef, (snapshot) => {
       const data: BookingFormValues[] = snapshot.docs.map((doc) => {
@@ -153,6 +157,35 @@ console.log("Current user in component:", user);
 
       dispatch({ type: 'getBookingData', payload: data });
       console.log(data, 'bookedData');
+      dispatch({ type: 'setloading', payload: false });
+    }, (error) => {
+      console.error('Error fetching data:', error);
+      dispatch({ type: 'setloading', payload: false });
+    });
+
+    return () => unSubscribe();
+  }, [user]);
+
+  //use effect to fetch users
+  useEffect(() => {
+    if(user?.uid !== process.env.REACT_APP_Accepted_Admin){
+        return
+      }
+    dispatch({ type: 'setloading', payload: true });
+    const unSubscribe = onSnapshot(userRef, (snapshot) => {
+      const data: userProp[] = snapshot.docs.map((doc) => {
+        const docData = doc.data();
+        return {
+          id: doc.id,
+          name: docData.name,
+          email: docData.email,
+          phone:docData.phone
+         
+        };
+      });
+
+      dispatch({ type: 'getUserData', payload: data });
+      console.log(data, 'userData');
       dispatch({ type: 'setloading', payload: false });
     }, (error) => {
       console.error('Error fetching data:', error);
