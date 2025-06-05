@@ -6,6 +6,7 @@ import { OrderHooks } from "./Hooks/OrderHooks";
 import { MessageModal } from "./MessageModal";
 import { useState } from "react";
 import { BookingFormValues } from "../Shared/Types";
+import { formatDate } from "./Hooks/formatDate";
 
 const { Title, Text } = Typography;
 
@@ -14,12 +15,6 @@ export const Order = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState("");
   const { getColumnSearchProps, handleRowClick, selectedRow,setIsModalVisible, isModalVisible, } = OrderHooks();
-const formatDate = (isoDateStr: string) => {
-  const [year, month, day] = isoDateStr.split("-");
-  const date = new Date(`${year}-${month}-${day}T00:00:00Z`);
-  const weekday = date.toLocaleDateString("en-GB", { weekday: "short" });
-  return `${day}, ${weekday}, ${month}, ${year}`;
-};
 
 
   

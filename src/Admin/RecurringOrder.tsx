@@ -5,21 +5,17 @@ import { FlatButton } from "../Shared/FlatButton";
 import { OrderHooks } from "./Hooks/OrderHooks";
 import { MessageModal } from "./MessageModal";
 import { useState } from "react";
-import { BookingFormValues } from "../Shared/Types";
+import { recurringBookingFormValues } from "../Shared/Types";
+import { formatDate } from "./Hooks/formatDate";
 
 const { Title, Text } = Typography;
 
 export const RecurringOrder = () => {
-  const { bookingData } = UseDataContext();
+  const { recurringBookingData } = UseDataContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState("");
   const { getColumnSearchProps, handleRowClick, selectedRow,setIsModalVisible, isModalVisible, } = OrderHooks();
-const formatDate = (isoDateStr: string) => {
-  const [year, month, day] = isoDateStr.split("-");
-  const date = new Date(`${year}-${month}-${day}T00:00:00Z`);
-  const weekday = date.toLocaleDateString("en-GB", { weekday: "short" });
-  return `${day}, ${weekday}, ${month}, ${year}`;
-};
+
 
 
   
@@ -32,13 +28,26 @@ const formatDate = (isoDateStr: string) => {
       ...getColumnSearchProps("name"),
     },
     {
-      title: "Date",
-      dataIndex: "date",
+      title: "Subscription start",
+      dataIndex: "subscriptionStart",
       key: "date",
-      render: (date:string) => formatDate(date),
-
-      ...getColumnSearchProps("id"),
+      render:(date:string)=>formatDate(date),
+      ...getColumnSearchProps("subscriptionStart"),
     },
+    {
+      title: "Subscription end",
+      dataIndex: "subscriptionEnd",
+      key: "date",
+      render:(date:string)=>formatDate(date),
+      ...getColumnSearchProps("subscriptionEnd"),
+    },
+
+    {
+        title: "Title",
+        dataIndex: "title",
+        key: "Title",
+    },
+
     {
       title: "Message",
       dataIndex: "email",
@@ -55,30 +64,7 @@ const formatDate = (isoDateStr: string) => {
       ),      
       ...getColumnSearchProps("email"),
     },
-    {
-  title: "Type",
-  dataIndex: "bookingType",
-  key: "bookingType",
-  render: (type: string) => {
-  const lowerType = type?.toLowerCase();
-  return (
-    <span
-      style={{
-        color: lowerType === "recurring" ? "green" : "gray",
-        fontWeight: 600,
-      }}
-    >
-      {lowerType === "recurring" ? "Recurring" : "One-time"}
-    </span>
-  );
-},
-  filters: [
-    { text: 'Recurring', value: 'recurring' },
-    { text: 'One-time', value: 'one-time' }
-  ],
-  onFilter: (value: any, record: BookingFormValues) =>
-    record.bookingType?.toLowerCase() === value
-,}
+    
 
 
   ];
@@ -87,7 +73,7 @@ const formatDate = (isoDateStr: string) => {
     <>
       <Table
       style={{cursor:'pointer'}}
-        dataSource={bookingData || []}
+        dataSource={recurringBookingData || []}
         columns={columns}
         rowKey="id"
         onRow={(record) => ({
@@ -110,19 +96,21 @@ const formatDate = (isoDateStr: string) => {
             <div>
               <Title level={5}>Customer Info</Title>
               <Text>
-                {/* <strong>Date:</strong> {new Date(selectedRow.date).toLocaleDateString("en-GB", {
-                  weekday: "short",
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                })} */}
-                {selectedRow.date}
+                <strong>Subscription-Start:</strong> {formatDate(selectedRow.subscriptionStart)}
               </Text>
               <br/>
               <Text>
-                <strong>Preferred Time:</strong> {selectedRow.time}
+                <strong>Subscription-End:</strong> {formatDate(selectedRow.subscriptionEnd)}
               </Text>
               <br/>
+              <Text>
+                <strong>Month:</strong> {selectedRow.month}
+              </Text>
+              <br/>
+              <Text>
+                <strong>Recurring-Cost:</strong> ₦{selectedRow.recurringCost}
+              </Text>
+              <br />
               <Text>
                 <strong>Name:</strong> {selectedRow.name}
               </Text>
@@ -138,12 +126,25 @@ const formatDate = (isoDateStr: string) => {
               <Text>
                 <strong>Phone:</strong> <a href={`tel:${selectedRow.phone}`}>{selectedRow.phone}</a>
               </Text>
+              <br/>
+              <Text>
+                <strong>Status:</strong> {selectedRow.status}
+              </Text>
+              <br/>
+              <Text>
+                <strong>Session-Dates:</strong>{
+                    selectedRow.sessionDates.map((data:string, index:any)=>(
+                        <p key={index}>{data}</p>
+                    ))
+                }
+              </Text>
+              
             </div>
 
             <Divider />
 
             <Text>
-                <strong>Total Price:</strong> ₦{selectedRow.totalPrice}
+                <strong>Total Price:</strong> ₦{selectedRow.totalCost}
             </Text>
 
             <Divider />

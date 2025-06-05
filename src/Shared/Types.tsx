@@ -17,6 +17,7 @@ export interface BookingFormValues {
 
 export type recurringBookingFormValues = {
   title: string;
+  name:string;
   email: string;
   sessionDates: Dayjs[];
   address:string;
@@ -29,6 +30,7 @@ export type recurringBookingFormValues = {
   subscriptionEnd:string,
   totalCost:number,
   totalSessions:number,
+  status:string,
 }
 
 

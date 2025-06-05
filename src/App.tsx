@@ -177,6 +177,7 @@ console.log("Current user in component:", user);
         const docData = doc.data();
         return {
           id: doc.id,
+          name:docData.name,
           title: docData.title,
           email: docData.email,
           sessionDates: docData.sessionDates,
@@ -191,6 +192,7 @@ console.log("Current user in component:", user);
           subscriptionEnd:docData.subscriptionEnd,
           totalCost:docData.totalCost,
           totalSessions:docData.totalSessions,
+          status:docData.status,
           
         };
       });

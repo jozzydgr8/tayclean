@@ -8,6 +8,7 @@ import { UseAuthContext } from "../Context/UseAuthContext";
 import { MessageModal } from "./MessageModal";
 import { useState } from "react";
 import { UseDataContext } from "../Context/UseDataContext";
+import { RecurringOrder } from "./RecurringOrder";
 
 export const Admin = ()=>{
     const navigate = useNavigate();
@@ -53,6 +54,9 @@ export const Admin = ()=>{
                 </Row>
                 <br/>
                 <Order/>
+                <br/>
+                <h2>Recurring Subscribers</h2>
+                <RecurringOrder/>
                 <MessageModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} selectedEmail={selectedEmail}/>
             </div>
         </section>
