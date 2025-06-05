@@ -23,6 +23,7 @@ export const Admin = ()=>{
     try{
       await signOut(auth);
       dispatch({type:'loading', payload:false});
+      navigate("/admin_832984/session");
     }catch(error){
       console.error(error);
       dispatch({type:'loading', payload:false});

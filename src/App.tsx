@@ -245,7 +245,7 @@ console.log("Current user in component:", user);
         <Route path=":id" element={<BookingPage/> }/>
 
       </Route>
-      <Route path="/admin" element= {<AdminLayout/>}>
+      <Route path="/admin_832984" element= {<AdminLayout/>}>
       <Route index element={<ProtectedRoutes user={user}><Admin/></ProtectedRoutes>}/>
       <Route path="session" element= {<GuestRoutes user={user}><Session/></GuestRoutes>}/>
       <Route path="settings" element={<Outlet/>}>

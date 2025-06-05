@@ -17,7 +17,7 @@ export const GuestRoutes = ({ user, children }: GuestRoutesProps) => {
 
   if (user.uid === adminUID) {
     // Logged-in admin — redirect to admin dashboard
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/admin_832984" replace />;
   }
 
   // Logged-in non-admin — still allow access to guest routes

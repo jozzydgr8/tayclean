@@ -12,13 +12,13 @@ import { UseAuthContext } from '../Context/UseAuthContext';
 export const SideNav: React.FC = () => {
   // Define the menu items
   const items: MenuItem[] = [
-    { label: 'Dashboard', key: '/admin' , icon :<HomeOutlined/>},
+    { label: 'Dashboard', key: "/admin_832984" , icon :<HomeOutlined/>},
     { label: 'SignOut', key: 'signOut', icon :<LogoutOutlined/> },
     { label: 'Help', key: 'help', icon :<QuestionCircleFilled/> },
     {label:'settings', key:'settings', icon : <SettingOutlined/>, children:[
       {
         label:"Update Password",
-        key:'/admin/settings/updatepassword'
+        key:'/admin_832984/settings/updatepassword'
 
       }
       // ,{

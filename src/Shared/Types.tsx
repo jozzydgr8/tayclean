@@ -16,6 +16,7 @@ export interface BookingFormValues {
 }
 
 export type recurringBookingFormValues = {
+  id:string;
   title: string;
   name:string;
   email: string;

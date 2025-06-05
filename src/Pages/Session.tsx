@@ -49,7 +49,7 @@ export default function Session() {
         setError(true);
         return;
       }
-      navigate('/admin');
+      navigate("/admin_832984");
    
       return
     } catch (error) {

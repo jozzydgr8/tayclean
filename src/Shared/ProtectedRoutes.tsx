@@ -9,10 +9,10 @@ type proptype={
 export const ProtectedRoutes = ({children, user}:proptype)=>{
     const adminUid = process.env.REACT_APP_Accepted_Admin;
     if(!user){
-       return <Navigate to={'/admin/session'}/>
+       return <Navigate to={'/admin_832984/session'}/>
     }
     if (user.uid !== adminUid) {
-    return <Navigate to="/admin/session" />;
+    return <Navigate to="/admin_832984/session" />;
   }
     return  <>{children}</> 
 }

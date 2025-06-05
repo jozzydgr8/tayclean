@@ -1,25 +1,37 @@
-import { Table, Modal, Divider, Typography, Space } from "antd";
+import { Table, Modal, Divider, Typography, Space, Select } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import { UseDataContext } from "../Context/UseDataContext";
 import { FlatButton } from "../Shared/FlatButton";
 import { OrderHooks } from "./Hooks/OrderHooks";
 import { MessageModal } from "./MessageModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { recurringBookingFormValues } from "../Shared/Types";
 import { formatDate } from "./Hooks/formatDate";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../App";
 
 const { Title, Text } = Typography;
 
 export const RecurringOrder = () => {
   const { recurringBookingData } = UseDataContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState("");
+ const [selectedEmail, setSelectedEmail] = useState<string | string[]>("");
   const { getColumnSearchProps, handleRowClick, selectedRow,setIsModalVisible, isModalVisible, } = OrderHooks();
-
+useEffect(() => {
+  recurringBookingData?.forEach((item) => {
+    const end = new Date(item.subscriptionEnd);
+    if (end < new Date() && item.status !== "inactive") {
+      // update status in Firestore
+      updateDoc(doc(db, "recurringSubscriptions", item.id), {
+        status: "inactive"
+      });
+    }
+  });
+}, [recurringBookingData]);
 
 
   
-  
+  const recurringemail = recurringBookingData?.map(email=>email.email)
   const columns = [
     {
       title: "Name",
@@ -64,6 +76,50 @@ export const RecurringOrder = () => {
       ),      
       ...getColumnSearchProps("email"),
     },
+    {
+  title: "Status",
+  dataIndex: "status",
+  key: "status",
+  render: (status: string) => {
+    let color = "gray";
+    let text = status.charAt(0).toUpperCase() + status.slice(1); // Capitalize
+
+    switch (status.toLowerCase()) {
+      case "active":
+        color = "green";
+        break;
+      case "inactive":
+        color = "red";
+        break;
+      case "pending":
+        color = "orange";
+        break;
+      // add more status cases as needed
+      default:
+        color = "gray";
+    }
+
+    return (
+      <span
+        style={{
+          padding: "4px 10px",
+          borderRadius: "12px",
+          backgroundColor: color,
+          color: "white",
+          fontWeight: 600,
+          fontSize: 12,
+          textTransform: "capitalize",
+          display: "inline-block",
+          minWidth: 70,
+          textAlign: "center",
+        }}
+      >
+        {text}
+      </span>
+    );
+  },
+  ...getColumnSearchProps("status"),
+},
     
 
 
@@ -71,6 +127,14 @@ export const RecurringOrder = () => {
 
   return (
     <>
+    <div>
+        <FlatButton title="send news to all recurring subscribers" onClick={()=>{
+            setIsModalOpen(true);
+            setSelectedEmail(recurringemail || []);
+        }}
+         className="successbutton" />
+    </div>
+    <br/>
       <Table
       style={{cursor:'pointer'}}
         dataSource={recurringBookingData || []}
@@ -132,12 +196,19 @@ export const RecurringOrder = () => {
               </Text>
               <br/>
               <Text>
-                <strong>Session-Dates:</strong>{
-                    selectedRow.sessionDates.map((data:string, index:any)=>(
-                        <p key={index}>{data}</p>
-                    ))
-                }
-              </Text>
+                <strong>Session-Dates:</strong>
+                <Select
+                    style={{ width: "100%", marginTop: 8 }}
+                    placeholder="Session Dates"
+                    value={selectedRow.sessionDates}
+                    options={selectedRow.sessionDates.map((date: string) => ({
+                    label: date,
+                    value: date,
+                    }))}
+                    disabled
+                    mode="multiple"
+                />
+            </Text>
               
             </div>
 
