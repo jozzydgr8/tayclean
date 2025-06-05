@@ -15,6 +15,23 @@ export interface BookingFormValues {
   bookingType:string
 }
 
+export type recurringBookingFormValues = {
+  title: string;
+  email: string;
+  sessionDates: Dayjs[];
+  address:string;
+  phone:string;
+  months:number,
+  bookingType:string,
+  numberOfMonths:number,
+  recurringCost:number,
+  subscriptionStart:string,
+  subscriptionEnd:string,
+  totalCost:number,
+  totalSessions:number,
+}
+
+
 
 export type MenuItem = {
     label: React.ReactNode; // `label` can be a string or any ReactNode (e.g., JSX, string)

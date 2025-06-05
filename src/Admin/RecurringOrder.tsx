@@ -9,7 +9,7 @@ import { BookingFormValues } from "../Shared/Types";
 
 const { Title, Text } = Typography;
 
-export const Order = () => {
+export const RecurringOrder = () => {
   const { bookingData } = UseDataContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState("");
@@ -99,7 +99,7 @@ const formatDate = (isoDateStr: string) => {
       />
 
       <Modal
-        title="Order Details"
+        title="RecurringOrder Details"
         open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}

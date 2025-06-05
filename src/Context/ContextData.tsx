@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { bookedDatesType, BookingFormValues, userProp } from "../Shared/Types";
+import { bookedDatesType, BookingFormValues, recurringBookingFormValues, userProp } from "../Shared/Types";
 
 
 // Types
@@ -10,8 +10,13 @@ type State = {
   loading: boolean;
   bookingData:BookingFormValues[] | null;
   user:userProp[] | null;
+  recurringBookingData:recurringBookingFormValues[] | null;
 };
 
+type recurringAction={
+  type:'getRecurringBookingData',
+  payload:recurringBookingFormValues[] | null;
+}
 type useraction = {
   type:'getUserData',
   payload:userProp[] | null,
@@ -30,7 +35,7 @@ type bookingDatesAction = {
   type:'getBookingDates',
   payload: bookedDatesType[] | null
 }
-type Action = LoadAction | bookingDataAction | bookingDatesAction | useraction;
+type Action = LoadAction | bookingDataAction | bookingDatesAction | useraction | recurringAction;
 
 type ContextProps = State & {
   dispatch: React.Dispatch<Action>;
@@ -46,6 +51,7 @@ const initialState: State = {
   loading: false,
   bookingData:null,
   user:null,
+  recurringBookingData:null
 
 };
 
@@ -66,7 +72,9 @@ const reducer = (state: State, action: Action): State => {
     case "getBookingDates":
        return { ...state, bookedDates: action.payload };
     case "getUserData":
-      return {...state, user: action.payload}
+      return {...state, user: action.payload};
+    case 'getRecurringBookingData':
+      return {...state, recurringBookingData:action.payload}
     default:
       return state;
   }

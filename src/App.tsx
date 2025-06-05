@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import {collection, getFirestore, onSnapshot} from "firebase/firestore";
 import { UseDataContext } from "./Context/UseDataContext";
 import { useEffect } from "react";
-import { bookedDatesType, BookingFormValues, userProp } from "./Shared/Types";
+import { bookedDatesType, BookingFormValues, recurringBookingFormValues, userProp } from "./Shared/Types";
 import dayjs from "dayjs";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { UseAuthContext } from "./Context/UseAuthContext";
@@ -156,6 +156,46 @@ console.log("Current user in component:", user);
       });
 
       dispatch({ type: 'getBookingData', payload: data });
+      console.log(data, 'bookedData');
+      dispatch({ type: 'setloading', payload: false });
+    }, (error) => {
+      console.error('Error fetching data:', error);
+      dispatch({ type: 'setloading', payload: false });
+    });
+
+    return () => unSubscribe();
+  }, [user]);
+
+  //useeffect to fetch recurring data
+  useEffect(() => {
+      if(user?.uid !== process.env.REACT_APP_Accepted_Admin){
+        return
+      }
+    dispatch({ type: 'setloading', payload: true });
+    const unSubscribe = onSnapshot(recurringSubscriptionsRef, (snapshot) => {
+      const data: recurringBookingFormValues[] = snapshot.docs.map((doc) => {
+        const docData = doc.data();
+        return {
+          id: doc.id,
+          title: docData.title,
+          email: docData.email,
+          sessionDates: docData.sessionDates,
+          address:docData.address,
+          phone:docData.phone,
+          time:docData.time,
+          months:docData.months,
+          bookingType:docData.bookingType,
+          numberOfMonths:docData.numberOfMonths,
+          recurringCost:docData.recurringCost,
+          subscriptionStart:docData.subscriptionStart,
+          subscriptionEnd:docData.subscriptionEnd,
+          totalCost:docData.totalCost,
+          totalSessions:docData.totalSessions,
+          
+        };
+      });
+
+      dispatch({ type: 'getRecurringBookingData', payload: data });
       console.log(data, 'bookedData');
       dispatch({ type: 'setloading', payload: false });
     }, (error) => {
