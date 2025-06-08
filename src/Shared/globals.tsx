@@ -16,7 +16,7 @@ export const service = [
   {
     id:"2",
     title: "General Residential cleaning",
-    description: "From a basic home clean, Our team of trained staff will leave you satisfied with a magic touch.",
+    description: "For a basic home clean, our team of trained staff will leave you satisfied with a magic touch.",
     image: windowcleaning,
     cost:40000,
     recurringCost:36000,
