@@ -32,7 +32,7 @@ export const Footer = ()=>{
                     
                 </div>
                 <br/> <br/>
-                <small>© Tayclean 2025</small>
+                <a href='https://jozzycodes.com/' target='_blank'><small>© Tayclean 2025</small></a>
             </div>
         </section>
     )
