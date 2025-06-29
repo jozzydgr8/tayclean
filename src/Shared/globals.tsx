@@ -20,7 +20,7 @@ export const service = [
     image: windowcleaning,
     cost:40000,
     recurringCost:36000,
-    service:"book general"
+    service:"book general residential cleaning"
   },
 
   {
@@ -30,7 +30,7 @@ export const service = [
     image: sofaCleaning,
     cost:55000,
     recurringCost:49500,
-    service:"book Domestic"
+    service:"book Deep Residential cleaning"
   },
 
   {
@@ -40,7 +40,7 @@ export const service = [
   image: cleaners,
   cost:75000,
   recurringCost:67500,
-  service:"Book Events",
+  service:"Book Events Cleaning",
   },
 
   {
@@ -50,7 +50,7 @@ export const service = [
     image: cleaningService,
     cost:100000,
     recurringCost:90000,
-    service:"BOOK COMMERCIAL",
+    service:"BOOK COMMERCIAL CLEANING",
   },
  
 ];
