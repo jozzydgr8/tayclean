@@ -34,7 +34,7 @@ export const service = [
   },
 
   {
-  id:"event_cleaning",
+  id:"event-cleaning",
   title: "Event<br>Cleaning",
   description: "Too tired to clean up after an eventful ceremony? No worries, we are just a call away.",
   image: cleaners,
