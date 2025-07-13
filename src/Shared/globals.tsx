@@ -14,7 +14,7 @@ export const services = [
 
 export const service = [
   {
-    id:"General_Cleaning",
+    id:"general-cleaning",
     title: "General Residential cleaning",
     description: "For a basic home clean, our team of trained staff will leave you satisfied with a magic touch.",
     image: windowcleaning,
@@ -24,7 +24,7 @@ export const service = [
   },
 
   {
-    id:"Deep_Cleaning",
+    id:"deep-cleaning",
     title: "Deep Residential cleaning",
     description: "From everyday mess to hidden grime, our expert cleaners deliver a deep clean that leaves your home feeling fresh and renewed.",
     image: sofaCleaning,
@@ -34,7 +34,7 @@ export const service = [
   },
 
   {
-  id:"Event_Cleaning",
+  id:"event_cleaning",
   title: "Event<br>Cleaning",
   description: "Too tired to clean up after an eventful ceremony? No worries, we are just a call away.",
   image: cleaners,
@@ -44,7 +44,7 @@ export const service = [
   },
 
   {
-    id:'Commercial_Cleaning',
+    id:'commercial-cleaning',
     title: "Commercial cleaning",
     description: "Hire us to keep your office and working space sparkling clean at a very affordable price.",
     image: cleaningService,

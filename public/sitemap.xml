@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
+  <url>
+    <loc>https://taycleaningsservices.com/</loc>
+    <priority>1.0</priority>
+  </url>
 
+  <!-- Dynamic Booking Pages -->
+  <url>
+    <loc>https://taycleaningsservices.com/general-cleaning</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taycleaningsservices.com/deep-cleaning</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taycleaningsservices.com/event-cleaning</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taycleaningsservices.com/commercial-cleaning</loc>
+    <priority>0.8</priority>
+  </url>
 
-<url>
-  <loc>https://www.taycleaningsservices.com/</loc>
-  <lastmod>2025-06-21T08:13:45+00:00</lastmod>
-</url>
-
-
+  <!-- Anchors like /#service are part of homepage and not listed in sitemap -->
 </urlset>
