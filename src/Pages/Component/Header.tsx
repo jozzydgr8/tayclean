@@ -3,6 +3,7 @@ import housebackground from '../../assets/housebackground.jpg'
 import { service } from "../../Shared/globals"
 import { Link } from 'react-router-dom';
 
+
 export const Header= ()=>{
     useEffect(()=>{
         var container = document.querySelector('.headerWrite');
@@ -49,7 +50,10 @@ export const Header= ()=>{
                             ))
                         }
                     </div> */}
+                   
                 </div>
+
+                
             </div>
         </section>
     )

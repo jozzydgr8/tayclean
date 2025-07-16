@@ -14,6 +14,7 @@ import { service } from '../Shared/globals';
 import { BookingForm } from './Component/BookingForm';
 import { toast } from 'react-toastify';
 import { SendMessage } from '../Shared/SendMessage';
+import { Helmet } from 'react-helmet-async';
 
 const weekdays = [
   { label: 'Monday', value: 1 },
@@ -354,7 +355,13 @@ await sendEmail(body);
 
   
   return (
-    <BookingForm
+    <>
+      <Helmet>
+        <title>Book Cleaning with TayCleaningServices</title>
+        <meta name="description" content={`${data?.title}-Schedule a professional cleaning appointment with TayCleaningServices. Fast, easy, and reliable.`} />
+      </Helmet>
+
+      <BookingForm
     form={form}
     onFinish={onFinish}
     weekdays={weekdays}
@@ -370,6 +377,8 @@ await sendEmail(body);
     disabledTime={disabledTime}
 
     />
+    </>
+    
   );
 };
 

@@ -390,3 +390,9 @@ input:-webkit-autofill {
   animation: backInRight;
   animation-duration: 1.2s;
 }
+
+#advertisement{
+  text-align: center;
+  background: var(--color-dark-green);
+  color: white;
+}

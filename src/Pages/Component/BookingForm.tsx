@@ -83,7 +83,7 @@ export const BookingForm = ({disabledTime,form,componentProp,proceedPayment,week
 
             <Form.Item label="Booking Type" name="bookingType" initialValue="recurring">
               <Radio.Group onChange={(e) => setIsRecurring(e.target.value === 'recurring')}>
-                <Radio value="recurring">Recurring (biweekly)</Radio>
+                <Radio value="recurring">Recurring (bi-monthly)</Radio>
                 <Radio value="one-time">One-Time</Radio>
               </Radio.Group>
             </Form.Item>
