@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom"
 import { FlatButton } from "../../Shared/FlatButton"
 import { service } from "../../Shared/globals"
+import { Typography } from "antd"
 
 export const Services = ()=>{
+    const {Title} = Typography
     return(
         <section id="service">
             <div className="container-fluid">
                 <h2>Our Services</h2>
+                <Title style={{color:"#2ac1aa",fontFamily:'podkova', textAlign:"center"}} level={3}>Enjoy 15% off  All Recurring Bookings, Including Bi-Monthly Cleaning!</Title>
                 <div className="servicegrid ">
                 {
                     service.map((service, index)=>(

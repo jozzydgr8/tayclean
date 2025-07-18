@@ -1,6 +1,6 @@
 import { Footer } from "../Shared/Footer"
 import { About } from "./Component/About"
-import { Advertisement } from "./Component/Advertisement"
+
 import { Book } from "./Component/Book"
 import { Choose } from "./Component/Choose"
 import { Header } from "./Component/Header"
@@ -14,7 +14,7 @@ export const Home = ()=>{
         <Header/>
         
         <Services/>
-        <Advertisement/>
+    
         <About/>
         
         
