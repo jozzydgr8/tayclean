@@ -9,9 +9,9 @@ import {DownOutlined} from '@ant-design/icons'
 export const Header= ()=>{
     useEffect(()=>{
         var container = document.querySelector('.headerWrite');
-        var containerButton = document.querySelector('.headerbutton');
+        
         container?.classList.add('sectionAnimationLeft');
-        containerButton?.classList.add('sectionAnimationUp')
+       
     },[])
     const styles = {
         background:{
@@ -52,7 +52,7 @@ export const Header= ()=>{
                             ))
                         }
                     </div> */}
-                                       <div className='animate-up'><a href='/#service'><FlatButton title='Learn More About Our Services ' icon={<DownOutlined/>} className='successbutton btn-lg'/></a></div>
+                <div><a href='/#service'><FlatButton title='Learn More About Our Services ' icon={<DownOutlined/>} className='successbutton btn-lg'/></a></div>
                 </div>
 
                 
