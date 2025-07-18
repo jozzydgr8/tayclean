@@ -12,8 +12,9 @@ export const Home = ()=>{
         <>
         
         <Header/>
-        <Advertisement/>
+        
         <Services/>
+        <Advertisement/>
         <About/>
         
         

@@ -393,6 +393,6 @@ input:-webkit-autofill {
 
 #advertisement{
   text-align: center;
-  background: var(--color-dark-green);
-  color: white;
+  /* background: var(--color-dark-green); */
+  /* color: white; */
 }

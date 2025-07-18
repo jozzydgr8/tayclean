@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import housebackground from '../../assets/housebackground.jpg'
 import { service } from "../../Shared/globals"
 import { Link } from 'react-router-dom';
+import { FlatButton } from '../../Shared/FlatButton';
+import {DownOutlined} from '@ant-design/icons'
 
 
 export const Header= ()=>{
@@ -50,7 +52,7 @@ export const Header= ()=>{
                             ))
                         }
                     </div> */}
-                   
+                                       <div className='animate-up'><a href='/#service'><FlatButton title='Learn More About Our Services ' icon={<DownOutlined/>} className='successbutton btn-lg'/></a></div>
                 </div>
 
                 

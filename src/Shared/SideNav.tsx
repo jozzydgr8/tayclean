@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Menu } from 'antd';
-import {QuestionCircleFilled, LogoutOutlined, HomeOutlined, UploadOutlined, SettingOutlined} from '@ant-design/icons'
+import {QuestionCircleFilled, LogoutOutlined, HomeOutlined,  SettingOutlined} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import { MenuItem } from './Types';
 import { signOut } from 'firebase/auth';
@@ -52,11 +52,11 @@ export const SideNav: React.FC = () => {
     <Menu
     style={{height: '100%'}}
     onClick={({key})=>{
-      if(key == 'signOut'){
+      if(key ==='signOut'){
         handleSignOut();
         return
       }
-      if (key == 'help') {
+      if (key === 'help') {
       window.open('https://wa.link/ubp14t', '_blank');
       return
       }

@@ -16,6 +16,7 @@ import {
 import { BookingFormValues } from '../../Shared/Types';
 import { Dayjs } from 'dayjs';
 import { PaystackButton } from 'react-paystack';
+import { FlatButton } from '../../Shared/FlatButton';
 type prop ={
   disabledTime: () => {
     disabledHours: () => number[];
@@ -75,6 +76,10 @@ export const BookingForm = ({disabledTime,form,componentProp,proceedPayment,week
           bordered={false}
           style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)',textTransform:'capitalize' }}
         >
+          <div className='row'>
+            <p className='col-md-9'>**Kindly note that the price quoted is for a mid-size space. contact us for more Info</p>
+            <a className='col-md-3' href='https://wa.link/tzom43' target='_blank'><FlatButton onClick={()=>{}} title='Contact Us' className='successbutton'/></a>
+          </div>
           <Form
           disabled={proceedPayment}
           form={form}
