@@ -32,7 +32,10 @@ export const Footer = ()=>{
                     
                 </div>
                 <br/> <br/>
-                <a href='https://jozzycodes.com/' target='_blank'><small>© Tayclean 2025</small></a>
+                <a href='https://taycleaningsservices.com/' target='_blank'><small>© Tayclean 2025</small></a>
+                <div>
+                    <small > <a style={{color:'gray'}} href='https://jozzycodes.com'>Built by jozzycodes</a></small>
+                </div>
             </div>
         </section>
     )
